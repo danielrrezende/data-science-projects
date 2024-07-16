@@ -1,0 +1,48 @@
+start=timeit.default_timer()
+
+df_ehook_km = pd.read_sql_query('''SELECT 
+                                       k.id, k.km, k.state, k.lat_min, k.lat_max, k.long_min, k.long_max,
+                                       d.id AS datapoint_tab_id, d.geo_accuracy, d.temperature, d.session_id AS datapoint_tab_session_id,
+                                       session.id AS session_tab_id, session.tag_id AS session_tab_tag_id,
+                                       tag_ehook.tag_id AS tag_ehook_tab_tag_id,
+                                       #HOUR(d.datetime) BETWEEN 00 AND 05 AND MINUTE(d.datetime) BETWEEN 00 AND 59 AS esp_00h_06hs,
+                                       #HOUR(d.datetime) BETWEEN 06 AND 11 AND MINUTE(d.datetime) BETWEEN 00 AND 59 AS esp_06_12hs,
+                                       #HOUR(d.datetime) BETWEEN 12 AND 17 AND MINUTE(d.datetime) BETWEEN 00 AND 59 AS esp_12_18,
+                                       #HOUR(d.datetime) BETWEEN 18 AND 23 AND MINUTE(d.datetime) BETWEEN 00 AND 59 AS esp_18_24hs
+                                       #CAST(sum(HOUR(datapoint.datetime) BETWEEN 00 AND 05 AND MINUTE(datapoint.datetime) BETWEEN 00 AND 59) AS SIGNED) AS esp_00h_06hs,
+                                       #CAST(sum(HOUR(datapoint.datetime) BETWEEN 06 AND 11 AND MINUTE(datapoint.datetime) BETWEEN 00 AND 59) AS SIGNED) AS esp_06_12hs,
+                                       #CAST(sum(HOUR(datapoint.datetime) BETWEEN 12 AND 17 AND MINUTE(datapoint.datetime) BETWEEN 00 AND 59) AS SIGNED) AS esp_12_18,
+                                       #CAST(sum(HOUR(datapoint.datetime) BETWEEN 18 AND 23 AND MINUTE(datapoint.datetime) BETWEEN 00 AND 59) AS SIGNED) AS esp_18_24hs
+                                       d.datetime,
+                                       CAST(CASE WHEN HOUR(d.datetime) BETWEEN 00 AND 05 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 
+                                              ELSE 0 
+                                          END AS SIGNED) AS esp_00h_06hs,
+                                       CAST(CASE WHEN HOUR(d.datetime) BETWEEN 06 AND 11 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 
+                                              ELSE 0 
+                                          END AS SIGNED) AS esp_06_12hs,
+                                       CAST(CASE WHEN HOUR(d.datetime) BETWEEN 12 AND 17 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 
+                                              ELSE 0 
+                                          END AS SIGNED) AS esp_12_18,
+                                       CAST(CASE WHEN HOUR(d.datetime) BETWEEN 18 AND 23 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 
+                                              ELSE 0 
+                                          END AS SIGNED) AS esp_18_24hs 
+                                   FROM datapoint AS d
+                                       JOIN dutra_kms as k
+                                       JOIN session
+                                           ON session.id = d.session_id
+                                       JOIN tag_ehook
+                                           ON tag_ehook.tag_id = session.tag_id
+                                   WHERE (longitude BETWEEN -46.383 AND -46.381)
+                                       AND (latitude BETWEEN -23.420 AND -23.418)
+                                       AND ((datetime > '2020-03-07' - interval 1 day) AND (datetime < '2020-03-07'))
+                                       AND (geo_accuracy <= 700)
+                                       AND (tag_ehook.tag_id IS NOT NULL)
+                                       AND (session_id IS NOT null)
+                                       AND (temperature IS NULL)
+                                   ORDER BY datetime DESC;''', connection)
+
+end=timeit.default_timer()
+
+check_time(start, end)
+
+df_ehook_km

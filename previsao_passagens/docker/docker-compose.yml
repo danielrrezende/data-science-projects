@@ -1,0 +1,275 @@
+version: '3.2'
+
+services:
+
+  mariadb:
+    build: ./database
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    # Em algum momento de atualizacao do ambiente o MariaDB foi
+    # interrompido com algumas transacoes em andamento. Houve
+    # falha na inicializacao. Se isto voltar acontecer, inicie
+    # este servico para rollback as transacoes que estavam abertas.
+    #command: --tc-heuristic-recover=ROLLBACK
+    volumes:
+      - type: ${MARIADB_FSTYPE:-volume}
+        source: "${MARIADB_FSSOURCE}"
+        target: /var/lib/mysql
+      - type: bind
+        source: "${MARIADB_FSTMP}"
+        target: /var/tmp
+    networks:
+        dbnet:
+            ipv4_address: 10.0.45.8
+
+
+  mongodb:
+    image: mongo:4.2.0-bionic
+    restart: always
+    volumes:
+      # uid: 999, gid: 999
+      - type: ${MONGODB_FSTYPE:-volume}
+        source: "${MONGODB_FSSOURCE}"
+        target: /data/db
+      # Uncomment to use config file
+      # - ./mongodb/config/:/etc/mongo
+      - ./mongodb/docker-entrypoint-initdb.d/ehook-init.js:/docker-entrypoint-initdb.d/ehook-init.js:ro
+    # By default Mongo will set the wiredTigerCacheSizeGB
+    # to a value proportional to the host's total memory
+    # regardless of memory limits you may have imposed on
+    # the container.
+    command: --wiredTigerCacheSizeGB 4 --quiet
+    # Uncomment to use config file instead command parameters
+    #command: --config /etc/mongo/mongod.conf
+    ports:
+      - "27017:27017"
+    networks:
+        dbnet:
+            ipv4_address: 10.0.45.4
+
+
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      # uid: 999, gid: 999
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - type: ${REDIS_FSTYPE:-volume}
+        source: "${REDIS_FSSOURCE}"
+        target: /data/redis
+    networks:
+        dbnet:
+            ipv4_address: 10.0.45.5
+
+
+  api:
+    build: ./api
+    restart: always
+    ports:
+      - "8085:8085"
+    volumes:
+      - type: ${EHOOK_LOG_FSTYPE:-volume}
+        source: "${EHOOK_LOG_FSSOURCE}"
+        target: /var/www/html/ehook/logs
+      - type: ${API_LOG_FSTYPE:-volume}
+        source: "${API_LOG_FSSOURCE}"
+        target: /var/www/html/logs
+      - type: ${EHOOK_KEY_FSTYPE:-volume}
+        source: "${EHOOK_KEY_FSSOURCE}"
+        target: /var/www/html/keys/
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.9
+        dbnet:
+            ipv4_address: 10.0.45.13
+    ulimits:
+      nofile:
+        soft: 98304
+        hard: 98304
+    sysctls:
+        net.ipv4.tcp_fin_timeout: 10
+        net.ipv4.ip_local_port_range: 1024 65023
+        net.ipv4.tcp_max_tw_buckets: 4000000
+
+
+  api-doc:
+    build: ./api-doc
+    networks:
+        default:
+            ipv4_address: 192.168.160.2
+    ports:
+      - "8087:8080"
+
+  api-doc-public:
+    build: ./api-doc-public
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.22
+
+  api-doc-vb-public:
+    build:
+      context: ./api-doc-public
+      dockerfile: Dockerfile-vonbraunlabs
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.23
+    ports:
+      - "8087:8080"
+
+  websocket-doc-public:
+    image: nginx
+    networks:
+        default:
+            ipv4_address: 192.168.160.3
+    ports:
+      - "8089:80"
+    volumes:
+      - type: bind
+        source: ./websocket-doc-public/html
+        target: /usr/share/nginx/html
+
+  websocket:
+    build: ./websocket
+    restart: always
+    volumes:
+      - type: ${WEBSOCKET_LOG_FSTYPE:-volume}
+        source: "${WEBSOCKET_LOG_FSSOURCE}"
+        target: /opt/log
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.14
+        dbnet:
+            ipv4_address: 10.0.45.17
+    ports:
+      - "8050:4000"
+    depends_on:
+      - redis
+    #healthcheck:
+      #test: ["CMD", "/opt/healthcheck/healthcheck.sh"]
+      #interval: 30s
+      #timeout: 45s
+      #retries: 3
+
+
+  geotracking-consolidator:
+    build:
+      context: ./api
+      dockerfile: Dockerfile-geotracking-consolidator
+    volumes:
+      - type: ${API_LOG_FSTYPE:-volume}
+        source: "${API_LOG_FSSOURCE}"
+        target: /var/www/html/logs:uid=33,gid=33
+    networks:
+        dbnet:
+            ipv4_address: 10.0.45.11
+    depends_on:
+      - redis
+
+
+  flask-admin:
+    build: ./flask-admin
+    restart: always
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.10
+        dbnet:
+            ipv4_address: 10.0.45.12
+    ports:
+      - "8010:5000"
+
+  ehook-support-manager:
+    build: ./ehook-support-manager
+    restart: always
+    volumes:
+      - type: ${SUPPORT_MANAGER_FSTYPE:-volume}
+        source: "${SUPPORT_MANAGER_FSSOURCE}"
+        target: /usr/src/app/ehook_support_manager/settings.py
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.24
+        dbnet:
+            ipv4_address: 10.0.45.24
+
+
+  rtls:
+    build: ./rtls
+    volumes:
+      - type: ${RTLS_LOG_FSTYPE:-volume}
+        source: "${RTLS_LOG_FSSOURCE}"
+        target: /rtls/log
+    restart: always
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.12
+        dbnet:
+            ipv4_address: 10.0.45.15
+    ports:
+      - "8020:3000"
+    depends_on:
+      - redis
+
+
+  jobs:
+    build: ./crontab
+    volumes:
+      - type: ${JOBS_FSTYPE:-volume}
+        source: "${JOBS_FSSOURCE}"
+        target: /var/log/
+    networks:
+        dbnet:
+            ipv4_address: 10.0.45.10
+
+
+  xminnovupload:
+    build:
+        context: ./xminnovupload
+        dockerfile: docker/Dockerfile
+    volumes:
+      - type: ${XMINNOVUPLOAD_CFG_FSTYPE:-volume}
+        source: "${XMINNOVUPLOAD_CFG_FSSOURCE}"
+        target: /app/config
+      - type: ${XMINNOVUPLOAD_LOG_FSTYPE:-volume}
+        source: "${XMINNOVUPLOAD_LOG_FSSOURCE}"
+        target: /app/logs
+    restart: always
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.13
+        dbnet:
+            ipv4_address: 10.0.45.16
+
+  antivirus-static:
+    image: nginx
+    volumes:
+      - type: bind
+        source: ./antivirus-static/html
+        target: /usr/share/nginx/html
+    ports:
+      - "8060:80"
+    networks:
+        frontnet:
+            ipv4_address: 10.0.44.37
+
+
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+        config:
+            - subnet: 192.168.160.0/20
+  frontnet:
+    driver: overlay
+    attachable: true
+    ipam:
+        config:
+            - subnet: 10.0.44.0/24
+  dbnet:
+    driver: overlay
+    attachable: true
+    ipam:
+        config:
+            - subnet: 10.0.45.0/24

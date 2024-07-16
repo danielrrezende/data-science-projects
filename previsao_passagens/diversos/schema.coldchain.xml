@@ -1,0 +1,1729 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="coldchain">
+        <table_structure name="appinstance">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="position" Type="point" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="company_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="reporter_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="sector_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="otacfg_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="appinstance" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1053465" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="0" Key_name="appinstance_company_id_reporter_id" Seq_in_index="1" Column_name="company_id" Collation="A" Cardinality="62" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="0" Key_name="appinstance_company_id_reporter_id" Seq_in_index="2" Column_name="reporter_id" Collation="A" Cardinality="1053465" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="1" Key_name="fk_appinstance_reporter_id" Seq_in_index="1" Column_name="reporter_id" Collation="A" Cardinality="1053465" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="1" Key_name="appinstance_id_reporter_id" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1053465" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="1" Key_name="appinstance_id_reporter_id" Seq_in_index="2" Column_name="reporter_id" Collation="A" Cardinality="1053465" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="1" Key_name="fk_appinstance_otacfg_id" Seq_in_index="1" Column_name="otacfg_id" Collation="A" Cardinality="36" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="appinstance" Non_unique="1" Key_name="fk_appinstance_sector_id" Seq_in_index="1" Column_name="sector_id" Collation="A" Cardinality="20" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="appinstance" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="1053465" Avg_row_length="84" Data_length="88719360" Max_data_length="0" Index_length="82493440" Data_free="4194304" Auto_increment="1080730" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="appinstance">
+                <trigger Trigger="appinstance_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:04:22.32">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `appinstance_before_insert` BEFORE INSERT ON `appinstance` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="appinstance_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:04:29.65">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `appinstance_before_update` BEFORE UPDATE ON `appinstance` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="business_category">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="code" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="Unique code for each business category" />
+                <field Field="name" Type="varchar(64)" Null="NO" Key="" Extra="" Comment="Name" />
+                <field Field="description" Type="varchar(255)" Null="NO" Key="" Extra="" Comment="Description" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="retail_network_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="business_category" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="business_category" Non_unique="0" Key_name="unique_business_category_retail_network_id_code" Seq_in_index="1" Column_name="retail_network_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="business_category" Non_unique="0" Key_name="unique_business_category_retail_network_id_code" Seq_in_index="2" Column_name="code" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="business_category" Non_unique="0" Key_name="unique_business_category_retail_network_id_name" Seq_in_index="1" Column_name="retail_network_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="business_category" Non_unique="0" Key_name="unique_business_category_retail_network_id_name" Seq_in_index="2" Column_name="name" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="business_category" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="49152" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="business_category">
+                <trigger Trigger="business_category_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.58">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`business_category_before_insert` BEFORE INSERT ON `coldchain`.`business_category`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="business_category_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.62">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`business_category_before_update` BEFORE UPDATE ON `coldchain`.`business_category`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="company">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="" />
+                <field Field="name" Type="varchar(64)" Null="YES" Key="" Default="NULL" Extra="" Comment="Company Name" />
+                <field Field="type" Type="tinyint(3) unsigned" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="company" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="39" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="company" Non_unique="0" Key_name="unique_company_identifier" Seq_in_index="1" Column_name="identifier" Collation="A" Cardinality="39" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="company" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="39" Avg_row_length="420" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="59" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="company">
+                <trigger Trigger="company_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.27">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `company_before_insert` BEFORE INSERT ON `coldchain`.`company` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="company_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.27">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `company_before_update` BEFORE UPDATE ON `coldchain`.`company` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="ctf_points">
+                <field Field="calendar_id" Type="int(11)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="lat" Type="decimal(7,3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="lng" Type="decimal(7,3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="events" Type="int(11)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <options Name="ctf_points" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="237980" Avg_row_length="46" Data_length="11026432" Max_data_length="0" Index_length="0" Data_free="4194304" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <table_structure name="ctf_region">
+                <field Field="lat" Type="decimal(7,3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="lng" Type="decimal(7,3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <options Name="ctf_region" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="340" Avg_row_length="48" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <table_structure name="datapoint">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="temperature" Type="float" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="datetime" Type="timestamp(3)" Null="NO" Key="MUL" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="index" Type="int(10) unsigned" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="counter" Type="int(10) unsigned" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="latitude" Type="decimal(10,8)" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="longitude" Type="decimal(11,8)" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="geo_accuracy" Type="float" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="geo_timestamp" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="rssi" Type="tinyint(4)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="block" Type="varchar(32)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="is_wanted" Type="tinyint(1)" Null="NO" Key="" Default="0" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="session_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="appinstance_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <key Table="datapoint" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="567811995" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_geo_accuracy" Seq_in_index="1" Column_name="geo_accuracy" Collation="A" Cardinality="14195299" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_latitude" Seq_in_index="1" Column_name="latitude" Collation="A" Cardinality="94635332" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_longitude" Seq_in_index="1" Column_name="longitude" Collation="A" Cardinality="81115999" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_datetime" Seq_in_index="1" Column_name="datetime" Collation="A" Cardinality="43677845" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_temperature" Seq_in_index="1" Column_name="temperature" Collation="A" Cardinality="194589" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_id" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="567811995" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_session_id" Seq_in_index="1" Column_name="session_id" Collation="A" Cardinality="560525" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="datapoint" Non_unique="1" Key_name="datapoint_appinstance_id" Seq_in_index="1" Column_name="appinstance_id" Collation="A" Cardinality="3102797" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="datapoint" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="567811995" Avg_row_length="128" Data_length="72742846464" Max_data_length="0" Index_length="234393993216" Data_free="167241580544" Auto_increment="779955123" Create_time="2020-04-14 12:37:21" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="datapoint">
+                <trigger Trigger="dbmodel_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-15 17:40:53.03">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dbmodel_before_insert` BEFORE INSERT ON `datapoint` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="datapoint_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-03-18 11:54:44.20">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `datapoint_before_insert` BEFORE INSERT ON `coldchain`.`datapoint`
+FOR EACH ROW
+BEGIN
+  DECLARE isWanted TINYINT(1);
+  SELECT CASE COUNT(*) WHEN 0 THEN 0  ELSE 1 END INTO isWanted FROM `session`
+    JOIN `tag` ON `session`.`tag_id` = `tag`.`id`
+    JOIN `tag_wanted` ON `tag_wanted`.`tag_id` = `tag`.`id`
+    WHERE (
+        (`tag_wanted`.`begin` <= NEW.`datetime` AND `tag_wanted`.`end` IS NULL) OR
+        (`tag_wanted`.`begin` <= NEW.`datetime` AND `tag_wanted`.`end` >= NEW.`datetime`)
+      ) AND
+      `tag_wanted`.`active` = 1 AND
+      `session`.`id` = NEW.`session_id`;
+  SET NEW.`is_wanted` = isWanted,
+    NEW.`create_by` = CURRENT_USER(),
+    NEW.`update_by` = CURRENT_USER();
+END
+]]>
+                </trigger>
+                <trigger Trigger="datapoint_after_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 10:12:21.88">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `datapoint_after_insert` AFTER INSERT ON `coldchain`.`datapoint`
+FOR EACH ROW
+BEGIN
+  UPDATE `session` SET
+    `session`.`last_datapoint_time` = NOW(),
+    `session`.`temperature_min` = LEAST(COALESCE(`session`.`temperature_min`, NEW.`temperature`), NEW.`temperature`),
+    `session`.`temperature_max` = GREATEST(COALESCE(`session`.`temperature_max`, NEW.`temperature`), NEW.`temperature`),
+    `session`.`count` = `session`.`count` + 1,
+    `session`.`begin` = LEAST(`session`.`begin`, NEW.datetime),
+    `session`.`end` = GREATEST(`session`.`end`, NEW.datetime)
+    WHERE `session`.`id` = NEW.session_id;
+  UPDATE `tag` JOIN `session` ON `tag`.`id` = `session`.`tag_id` SET `tag`.`last_datapoint_time` = NOW() WHERE `session`.`id` = NEW.`session_id`;
+END
+]]>
+                </trigger>
+                <trigger Trigger="datapoint_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.22">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `datapoint_before_update` BEFORE UPDATE ON `coldchain`.`datapoint` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+                <trigger Trigger="dbmodel_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-15 17:40:53.03">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dbmodel_before_update` BEFORE UPDATE ON `datapoint` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="dbmodel">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="version" Type="varchar(8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="api" Type="varchar(8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="dbmodel" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="dbmodel" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Auto_increment="2" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <table_structure name="devicemodel">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="model" Type="varchar(32)" Null="NO" Key="UNI" Extra="" Comment="" />
+                <field Field="manufacturer" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="has_ble" Type="tinyint(1)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="has_peripheral" Type="tinyint(1)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="has_mult_adv" Type="tinyint(1)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="has_secure_hw" Type="tinyint(1)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="devicemodel" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1879" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="devicemodel" Non_unique="0" Key_name="unique_devicemodel_model" Seq_in_index="1" Column_name="model" Collation="A" Cardinality="1879" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="devicemodel" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="1879" Avg_row_length="122" Data_length="229376" Max_data_length="0" Index_length="81920" Data_free="0" Auto_increment="3042" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="devicemodel">
+                <trigger Trigger="devicemodel_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:05:13.28">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `devicemodel_before_insert` BEFORE INSERT ON `coldchain`.`devicemodel`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="devicemodel_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:05:13.29">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `devicemodel_before_update` BEFORE UPDATE ON `coldchain`.`devicemodel`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="deviceosversion">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="release" Type="varchar(16)" Null="YES" Key="UNI" Default="NULL" Extra="" Comment="" />
+                <field Field="sdk" Type="varchar(16)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="deviceosversion" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="64" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="deviceosversion" Non_unique="0" Key_name="unique_deviceosversion_release" Seq_in_index="1" Column_name="release" Collation="A" Cardinality="64" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="deviceosversion" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="64" Avg_row_length="256" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="77" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="deviceosversion">
+                <trigger Trigger="deviceosversion_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:05:13.30">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `deviceosversion_before_insert` BEFORE INSERT ON `coldchain`.`deviceosversion`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="deviceosversion_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:05:13.31">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `deviceosversion_before_update` BEFORE UPDATE ON `coldchain`.`deviceosversion`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="dim_area">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="lat" Type="decimal(7,3)" Null="NO" Key="MUL" Extra="" Comment="Global latitude used to represente the area" />
+                <field Field="lng" Type="decimal(7,3)" Null="NO" Key="" Extra="" Comment="Global longitude used to represente the area" />
+                <field Field="area" Type="decimal(10,3)" Null="YES" Key="" Default="NULL" Extra="" Comment="Approximate area of the represented GPS region" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="dim_area" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="155112" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dim_area" Non_unique="0" Key_name="unique_dim_area_geo" Seq_in_index="1" Column_name="lat" Collation="A" Cardinality="5744" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dim_area" Non_unique="0" Key_name="unique_dim_area_geo" Seq_in_index="2" Column_name="lng" Collation="A" Cardinality="155112" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="dim_area" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="155112" Avg_row_length="104" Data_length="16269312" Max_data_length="0" Index_length="3686400" Data_free="5242880" Auto_increment="156707" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="dim_area">
+                <trigger Trigger="dim_area_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.50">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dim_area_before_insert` BEFORE INSERT ON `coldchain`.`dim_area`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="dim_area_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.51">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dim_area_before_update` BEFORE UPDATE ON `coldchain`.`dim_area`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="dim_calendar">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="year" Type="int(11)" Null="NO" Key="" Extra="" Comment="Date part corresponding to the Year" />
+                <field Field="month" Type="int(11)" Null="NO" Key="" Extra="" Comment="Date part corresponding to the Month" />
+                <field Field="day" Type="int(11)" Null="YES" Key="" Default="NULL" Extra="" Comment="Date part corresponding to the Day" />
+                <field Field="hour" Type="int(11)" Null="YES" Key="" Default="NULL" Extra="" Comment="Date part corresponding to the Hour" />
+                <field Field="weekday" Type="int(11)" Null="YES" Key="" Default="NULL" Extra="" Comment="Date part corresponding to the day of the week" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="dim_calendar" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="7506" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="dim_calendar" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="7506" Avg_row_length="211" Data_length="1589248" Max_data_length="0" Index_length="0" Data_free="4194304" Auto_increment="2019123124" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="dim_calendar">
+                <trigger Trigger="dim_calendar_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.51">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dim_calendar_before_insert` BEFORE INSERT ON `coldchain`.`dim_calendar`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="dim_calendar_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.52">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dim_calendar_before_update` BEFORE UPDATE ON `coldchain`.`dim_calendar`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="dim_network">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="name" Type="varchar(64)" Null="NO" Key="" Extra="" Comment="Name of the network" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="dim_network" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="34" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="dim_network" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="34" Avg_row_length="481" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Auto_increment="35" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="dim_network">
+                <trigger Trigger="dim_network_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.52">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dim_network_before_insert` BEFORE INSERT ON `coldchain`.`dim_network`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="dim_network_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.52">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `dim_network_before_update` BEFORE UPDATE ON `coldchain`.`dim_network`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="dutra_location">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="state" Type="enum('SP','RJ')" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="km" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="seq" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="" />
+                <field Field="latitude" Type="decimal(10,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="longitude" Type="decimal(11,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="direction" Type="enum('Norte','Sul')" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="extra" Type="varchar(63)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="" />
+                <key Table="dutra_location" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="24" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dutra_location" Non_unique="0" Key_name="unique_dutra_location_state_km_direction" Seq_in_index="1" Column_name="state" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dutra_location" Non_unique="0" Key_name="unique_dutra_location_state_km_direction" Seq_in_index="2" Column_name="km" Collation="A" Cardinality="24" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dutra_location" Non_unique="0" Key_name="unique_dutra_location_state_km_direction" Seq_in_index="3" Column_name="direction" Collation="A" Cardinality="24" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dutra_location" Non_unique="0" Key_name="unique_dutra_location_seq" Seq_in_index="1" Column_name="seq" Collation="A" Cardinality="24" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="dutra_location" Non_unique="0" Key_name="unique_dutra_location_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="24" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="dutra_location" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="24" Avg_row_length="682" Data_length="16384" Max_data_length="0" Index_length="49152" Data_free="0" Auto_increment="63" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="dutra_location">
+                <trigger Trigger="dutra_location_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-12-23 18:51:54.46">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `coldchain`.`dutra_location_before_insert` BEFORE INSERT ON `coldchain`.`dutra_location`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="dutra_location_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-12-23 18:51:54.46">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `coldchain`.`dutra_location_before_update` BEFORE UPDATE ON `coldchain`.`dutra_location`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="ehook_virtualtag">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="store_category_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="" />
+                <key Table="ehook_virtualtag" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="ehook_virtualtag" Non_unique="0" Key_name="unique_ehook_virtualtag_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="ehook_virtualtag" Non_unique="1" Key_name="fk_ehook_virtualtag_store_category_id" Seq_in_index="1" Column_name="store_category_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="ehook_virtualtag" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="49152" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="ehook_virtualtag">
+                <trigger Trigger="ehook_virtualtag_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.80">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`ehook_virtualtag_before_insert` BEFORE INSERT ON `coldchain`.`ehook_virtualtag`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="ehook_virtualtag_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.84">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`ehook_virtualtag_before_update` BEFORE UPDATE ON `coldchain`.`ehook_virtualtag`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="fact_event">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="events" Type="int(11)" Null="NO" Key="" Extra="" Comment="Number of events reported on referenced dimensions" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="calendar_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="Time when the event was registered" />
+                <field Field="area_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="Area where the event was registered" />
+                <field Field="network_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="Network in which the event was registered" />
+                <key Table="fact_event" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="4395910" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="fact_event" Non_unique="1" Key_name="fk_fact_event_calendar_id" Seq_in_index="1" Column_name="calendar_id" Collation="A" Cardinality="1710" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="fact_event" Non_unique="1" Key_name="fk_fact_event_area_id" Seq_in_index="1" Column_name="area_id" Collation="A" Cardinality="1250" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="fact_event" Non_unique="1" Key_name="fk_fact_event_network_id" Seq_in_index="1" Column_name="network_id" Collation="A" Cardinality="16" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="fact_event" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="4395910" Avg_row_length="92" Data_length="406716416" Max_data_length="0" Index_length="233668608" Data_free="6291456" Auto_increment="138931647" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="fact_event">
+                <trigger Trigger="fact_event_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.53">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `fact_event_before_insert` BEFORE INSERT ON `coldchain`.`fact_event`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="fact_event_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-19 13:47:45.53">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `fact_event_before_update` BEFORE UPDATE ON `coldchain`.`fact_event`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="geopoint">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="datetime" Type="timestamp(3)" Null="NO" Key="MUL" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="end_datetime" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="latitude" Type="decimal(10,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="longitude" Type="decimal(11,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="geo_accuracy" Type="float" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="geo_timestamp" Type="timestamp(3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="qty" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="Quantity of datapoints, consolidated on this geopoint" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="appinstance_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <key Table="geopoint" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="242684055" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint" Non_unique="0" Key_name="unique_geopoint_datetime_tag_id" Seq_in_index="1" Column_name="datetime" Collation="A" Cardinality="6222668" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint" Non_unique="0" Key_name="unique_geopoint_datetime_tag_id" Seq_in_index="2" Column_name="tag_id" Collation="A" Cardinality="242684055" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint" Non_unique="1" Key_name="fk_geopoint_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="156772" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint" Non_unique="1" Key_name="fk_geopoint_appinstance_id" Seq_in_index="1" Column_name="appinstance_id" Collation="A" Cardinality="1436000" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="geopoint" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="242684055" Avg_row_length="99" Data_length="24040701952" Max_data_length="0" Index_length="19894616064" Data_free="6291456" Auto_increment="319008276" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="geopoint">
+                <trigger Trigger="geopoint_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-06-28 20:54:19.33">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `geopoint_before_insert` BEFORE INSERT ON `coldchain`.`geopoint`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="geopoint_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-06-28 20:54:19.34">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `geopoint_before_update` BEFORE UPDATE ON `coldchain`.`geopoint`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="geopoint_consolidates_datapoint">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="datapoint_id" Type="varchar(24)" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="geopoint_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="geopoint_consolidates_datapoint" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="325611656" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint_consolidates_datapoint" Non_unique="0" Key_name="unique_geopoint_consolidates_datapoint_datapoint_id_geopoint_id" Seq_in_index="1" Column_name="datapoint_id" Collation="A" Cardinality="325611656" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint_consolidates_datapoint" Non_unique="0" Key_name="unique_geopoint_consolidates_datapoint_datapoint_id_geopoint_id" Seq_in_index="2" Column_name="geopoint_id" Collation="A" Cardinality="325611656" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint_consolidates_datapoint" Non_unique="1" Key_name="fk_geopoint_consolidates_datapoint_geopoint_id" Seq_in_index="1" Column_name="geopoint_id" Collation="A" Cardinality="325611656" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="geopoint_consolidates_datapoint" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="325611656" Avg_row_length="85" Data_length="27810332672" Max_data_length="0" Index_length="26652704768" Data_free="4194304" Auto_increment="417715996" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="geopoint_consolidates_datapoint">
+                <trigger Trigger="geopoint_consolidates_datapoint_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-06-28 20:54:19.34">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `geopoint_consolidates_datapoint_before_insert` BEFORE INSERT ON `coldchain`.`geopoint_consolidates_datapoint`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="geopoint_consolidates_datapoint_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-06-28 20:54:19.35">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `geopoint_consolidates_datapoint_before_update` BEFORE UPDATE ON `coldchain`.`geopoint_consolidates_datapoint`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="geopoint_has_appinstance">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="geopoint_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="appinstance_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="geopoint_has_appinstance" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="154875538" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint_has_appinstance" Non_unique="0" Key_name="unique_geopoint_has_appinstance_appinstance_id_geopoint_id" Seq_in_index="1" Column_name="appinstance_id" Collation="A" Cardinality="1155787" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint_has_appinstance" Non_unique="0" Key_name="unique_geopoint_has_appinstance_appinstance_id_geopoint_id" Seq_in_index="2" Column_name="geopoint_id" Collation="A" Cardinality="154875538" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="geopoint_has_appinstance" Non_unique="1" Key_name="fk_geopoint_has_appinstance_geopoint_id" Seq_in_index="1" Column_name="geopoint_id" Collation="A" Cardinality="154875538" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="geopoint_has_appinstance" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="154875538" Avg_row_length="79" Data_length="12329156608" Max_data_length="0" Index_length="7328497664" Data_free="4194304" Auto_increment="208940255" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="geopoint_has_appinstance">
+                <trigger Trigger="geopoint_has_appinstance_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-12-11 15:26:03.23">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `coldchain`.`geopoint_has_appinstance_before_insert` BEFORE INSERT ON `coldchain`.`geopoint_has_appinstance`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="geopoint_has_appinstance_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-12-11 15:26:03.24">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `coldchain`.`geopoint_has_appinstance_before_update` BEFORE UPDATE ON `coldchain`.`geopoint_has_appinstance`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="import_data">
+                <field Field="reporter_identifier" Type="varchar(256)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="datetime" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="on update current_timestamp(3)" Comment="" />
+                <field Field="latitude" Type="decimal(10,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="longitude" Type="decimal(11,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <options Name="import_data" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="25231360" Max_data_length="0" Index_length="0" Data_free="79691776" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <table_structure name="item">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="name" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="description" Type="varchar(128)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="company_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="type_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="item_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="Parent Item" />
+                <key Table="item" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="50" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="item" Non_unique="0" Key_name="unique_item_company_id_identifier" Seq_in_index="1" Column_name="company_id" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="item" Non_unique="0" Key_name="unique_item_company_id_identifier" Seq_in_index="2" Column_name="identifier" Collation="A" Cardinality="50" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="item" Non_unique="1" Key_name="fk_item_type_id" Seq_in_index="1" Column_name="type_id" Collation="A" Cardinality="4" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="item" Non_unique="1" Key_name="fk_item_item_id" Seq_in_index="1" Column_name="item_id" Collation="A" Cardinality="2" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="item" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="50" Avg_row_length="327" Data_length="16384" Max_data_length="0" Index_length="49152" Data_free="0" Auto_increment="65" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="item">
+                <trigger Trigger="item_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.74">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `item_before_insert` BEFORE INSERT ON `coldchain`.`item`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="item_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.74">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `item_before_update` BEFORE UPDATE ON `coldchain`.`item`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="item_type">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="varchar(32)" Null="NO" Key="UNI" Extra="" Comment="" />
+                <field Field="name" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="description" Type="varchar(128)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="item_type" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="7" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="item_type" Non_unique="0" Key_name="unique_item_type_identifier" Seq_in_index="1" Column_name="identifier" Collation="A" Cardinality="7" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="item_type" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="7" Avg_row_length="2340" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="8" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="item_type">
+                <trigger Trigger="item_type_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.73">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `item_type_before_insert` BEFORE INSERT ON `coldchain`.`item_type`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="item_type_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.73">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `item_type_before_update` BEFORE UPDATE ON `coldchain`.`item_type`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="libversion">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="release" Type="varchar(16)" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="type" Type="tinyint(3) unsigned" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="libversion" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="36" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="libversion" Non_unique="0" Key_name="unique_libversion_release_type" Seq_in_index="1" Column_name="release" Collation="A" Cardinality="36" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="libversion" Non_unique="0" Key_name="unique_libversion_release_type" Seq_in_index="2" Column_name="type" Collation="A" Cardinality="36" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="libversion" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="36" Avg_row_length="455" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="40" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="libversion">
+                <trigger Trigger="libversion_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-12 15:12:52.31">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `libversion_before_insert` BEFORE INSERT ON `coldchain`.`libversion`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="libversion_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-12 15:12:59.00">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `libversion_before_update` BEFORE UPDATE ON `coldchain`.`libversion`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="location">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="name" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="description" Type="varchar(128)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="map" Type="geometry" Null="NO" Key="" Default="st_geometryfromtext('POLYGON((0 0, 0 0))')" Extra="" Comment="" />
+                <field Field="latitude" Type="decimal(10,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="longitude" Type="decimal(11,8)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="company_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="rtlscfg_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <key Table="location" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="location" Non_unique="0" Key_name="unique_location_company_id_identifier" Seq_in_index="1" Column_name="company_id" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="location" Non_unique="0" Key_name="unique_location_company_id_identifier" Seq_in_index="2" Column_name="identifier" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="location" Non_unique="1" Key_name="fk_location_rtlscfg_id" Seq_in_index="1" Column_name="rtlscfg_id" Collation="A" Cardinality="2" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="location" Engine="InnoDB" Version="11" Row_format="Dynamic" Rows="6" Avg_row_length="2730" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="10" Create_time="2020-03-12 17:11:59" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="location">
+                <trigger Trigger="location_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.76">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `location_before_insert` BEFORE INSERT ON `coldchain`.`location`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="location_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.76">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `location_before_update` BEFORE UPDATE ON `coldchain`.`location`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="obuid">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="value" Type="bigint(20) unsigned" Null="NO" Key="UNI" Extra="" Comment="Actual OBUID value" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="user_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="YES" Key="UNI" Default="NULL" Extra="" Comment="" />
+                <key Table="obuid" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="10480" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="obuid" Non_unique="0" Key_name="unique_obuid_value" Seq_in_index="1" Column_name="value" Collation="A" Cardinality="10480" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="obuid" Non_unique="0" Key_name="unique_obuid_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="10480" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="obuid" Non_unique="1" Key_name="fk_obuid_user_id" Seq_in_index="1" Column_name="user_id" Collation="A" Cardinality="4" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="obuid" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="10480" Avg_row_length="151" Data_length="1589248" Max_data_length="0" Index_length="589824" Data_free="4194304" Auto_increment="11210" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="obuid">
+                <trigger Trigger="obuid_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.44">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `obuid_before_insert` BEFORE INSERT ON `coldchain`.`obuid`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="obuid_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.45">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `obuid_before_update` BEFORE UPDATE ON `coldchain`.`obuid`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="otacfg">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="name" Type="varchar(32)" Null="YES" Key="UNI" Default="NULL" Extra="" Comment="" />
+                <field Field="description" Type="text" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="value" Type="longtext" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="otacfg" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="19" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="otacfg" Non_unique="0" Key_name="unique_otacfg_name" Seq_in_index="1" Column_name="name" Collation="A" Cardinality="19" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="otacfg" Engine="InnoDB" Version="11" Row_format="Dynamic" Rows="19" Avg_row_length="862" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="29" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="otacfg">
+                <trigger Trigger="otacfg_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-04 10:56:01.33">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `otacfg_before_insert` BEFORE INSERT ON `coldchain`.`otacfg`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="otacfg_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-04 10:56:01.33">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER `otacfg_before_update` BEFORE UPDATE ON `coldchain`.`otacfg`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="pack">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="Tag that represents this pack" />
+                <field Field="datapoint_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="Last datapoint considered on previous run" />
+                <key Table="pack" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="pack" Non_unique="1" Key_name="fk_pack_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="pack" Non_unique="1" Key_name="fk_pack_datapoint_id" Seq_in_index="1" Column_name="datapoint_id" Collation="A" Cardinality="2" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="pack" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="8192" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="3" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="pack">
+                <trigger Trigger="pack_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-08-10 15:24:23.53">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `coldchain`.`pack_before_insert` BEFORE INSERT ON `coldchain`.`pack`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="pack_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-08-10 15:24:23.96">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `coldchain`.`pack_before_update` BEFORE UPDATE ON `coldchain`.`pack`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="permission">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="name" Type="varchar(64)" Null="NO" Key="UNI" Extra="" Comment="Permission Name" />
+                <field Field="description" Type="varchar(255)" Null="NO" Key="" Extra="" Comment="Permission Description" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="permission" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="permission" Non_unique="0" Key_name="unique_permission_name" Seq_in_index="1" Column_name="name" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="permission" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="permission">
+                <trigger Trigger="permission_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-08 15:40:51.02">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `permission_before_insert` BEFORE INSERT ON `coldchain`.`permission`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="permission_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-08 15:40:51.02">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `permission_before_update` BEFORE UPDATE ON `coldchain`.`permission`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="reporter">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="varchar(32)" Null="NO" Key="UNI" Extra="" Comment="Reporter identification" />
+                <field Field="alias" Type="varchar(32)" Null="YES" Key="" Default="NULL" Extra="" Comment="Reporter alias" />
+                <field Field="user_agent" Type="text" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="reporterdevice_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <key Table="reporter" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="1088720" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporter" Non_unique="0" Key_name="unique_reporter_identifier" Seq_in_index="1" Column_name="identifier" Collation="A" Cardinality="1088720" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporter" Non_unique="1" Key_name="fk_reporter_reporterdevice_id" Seq_in_index="1" Column_name="reporterdevice_id" Collation="A" Cardinality="10174" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="reporter" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="1088720" Avg_row_length="162" Data_length="176963584" Max_data_length="0" Index_length="103858176" Data_free="5242880" Auto_increment="1101515" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="reporter">
+                <trigger Trigger="reporter_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-15 17:40:53.05">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `reporter_before_insert` BEFORE INSERT ON `reporter` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="reporter_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-15 17:40:53.06">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `reporter_before_update` BEFORE UPDATE ON `reporter` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="reporterdevice">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="devicemodel_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="deviceosversion_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="libversion_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="reporterdevice" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="6463" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporterdevice" Non_unique="0" Key_name="unique_reporterdevice_devicemode81c5b731c2cf5a1d1fff30c4ec0a5993" Seq_in_index="1" Column_name="devicemodel_id" Collation="A" Cardinality="6463" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporterdevice" Non_unique="0" Key_name="unique_reporterdevice_devicemode81c5b731c2cf5a1d1fff30c4ec0a5993" Seq_in_index="2" Column_name="deviceosversion_id" Collation="A" Cardinality="6463" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporterdevice" Non_unique="0" Key_name="unique_reporterdevice_devicemode81c5b731c2cf5a1d1fff30c4ec0a5993" Seq_in_index="3" Column_name="libversion_id" Collation="A" Cardinality="6463" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporterdevice" Non_unique="1" Key_name="fk_reporterdevice_deviceosversion_id" Seq_in_index="1" Column_name="deviceosversion_id" Collation="A" Cardinality="150" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="reporterdevice" Non_unique="1" Key_name="fk_reporterdevice_libversion_id" Seq_in_index="1" Column_name="libversion_id" Collation="A" Cardinality="76" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="reporterdevice" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="6463" Avg_row_length="245" Data_length="1589248" Max_data_length="0" Index_length="573440" Data_free="4194304" Auto_increment="7686" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="reporterdevice">
+                <trigger Trigger="reporterdevice_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:05:13.32">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `reporterdevice_before_insert` BEFORE INSERT ON `coldchain`.`reporterdevice`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="reporterdevice_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-12-05 18:05:14.86">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `reporterdevice_before_update` BEFORE UPDATE ON `coldchain`.`reporterdevice`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="retail_network">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="code" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="Unique code for each retail network" />
+                <field Field="name" Type="varchar(64)" Null="NO" Key="UNI" Extra="" Comment="Name" />
+                <field Field="description" Type="varchar(255)" Null="NO" Key="" Extra="" Comment="Description" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="retail_network" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="retail_network" Non_unique="0" Key_name="unique_retail_network_code" Seq_in_index="1" Column_name="code" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="retail_network" Non_unique="0" Key_name="unique_retail_network_name" Seq_in_index="1" Column_name="name" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="retail_network" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="retail_network">
+                <trigger Trigger="retail_network_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.49">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`retail_network_before_insert` BEFORE INSERT ON `coldchain`.`retail_network`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="retail_network_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.55">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`retail_network_before_update` BEFORE UPDATE ON `coldchain`.`retail_network`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="role">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="name" Type="varchar(64)" Null="NO" Key="UNI" Extra="" Comment="Role Name" />
+                <field Field="description" Type="varchar(255)" Null="NO" Key="" Extra="" Comment="Role Description" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="role" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="5" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="role" Non_unique="0" Key_name="unique_role_name" Seq_in_index="1" Column_name="name" Collation="A" Cardinality="5" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="role" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="5" Avg_row_length="3276" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="8" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="role">
+                <trigger Trigger="role_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.25">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `role_before_insert` BEFORE INSERT ON `coldchain`.`role`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="role_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.26">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `role_before_update` BEFORE UPDATE ON `coldchain`.`role`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="rolepermission">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="role_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="permission_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="rolepermission" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="rolepermission" Non_unique="0" Key_name="unique_rolepermission_role_id_permission_id" Seq_in_index="1" Column_name="role_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="rolepermission" Non_unique="0" Key_name="unique_rolepermission_role_id_permission_id" Seq_in_index="2" Column_name="permission_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="rolepermission" Non_unique="1" Key_name="fk_rolepermission_permission_id" Seq_in_index="1" Column_name="permission_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="rolepermission" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="rolepermission">
+                <trigger Trigger="rolepermission_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-08 15:40:51.03">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `rolepermission_before_insert` BEFORE INSERT ON `coldchain`.`rolepermission`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="rolepermission_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-08 15:40:51.03">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `rolepermission_before_update` BEFORE UPDATE ON `coldchain`.`rolepermission`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="rtls_calibration">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="rssi" Type="int(11)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="factor" Type="float" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="distance" Type="float" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="appinstance_id" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="" />
+                <key Table="rtls_calibration" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="rtls_calibration" Non_unique="0" Key_name="unique_rtls_calibration_appinstance_id" Seq_in_index="1" Column_name="appinstance_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="rtls_calibration" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="rtls_calibration">
+                <trigger Trigger="rtls_calibration_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-07-02 19:10:16.51">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `rtls_calibration_before_insert` BEFORE INSERT ON `coldchain`.`rtls_calibration`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="rtls_calibration_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-07-02 19:10:16.52">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `rtls_calibration_before_update` BEFORE UPDATE ON `coldchain`.`rtls_calibration`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="rtlscfg">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="name" Type="varchar(32)" Null="NO" Key="UNI" Extra="" Comment="" />
+                <field Field="description" Type="text" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="interval" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="datapoint_lifespan" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="absence_limit" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="zone" Type="longtext" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="precision" Type="longtext" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="rssi" Type="longtext" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="rtlscfg" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="rtlscfg" Non_unique="0" Key_name="unique_rtlscfg_name" Seq_in_index="1" Column_name="name" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="rtlscfg" Engine="InnoDB" Version="11" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="1" Create_time="2020-03-12 17:11:59" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="rtlscfg">
+                <trigger Trigger="rtlscfg_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2020-03-12 17:11:59.91">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `rtlscfg_before_insert` BEFORE INSERT ON `coldchain`.`rtlscfg`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="rtlscfg_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2020-03-12 17:11:59.91">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `rtlscfg_before_update` BEFORE UPDATE ON `coldchain`.`rtlscfg`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="sector">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="name" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="description" Type="varchar(128)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="map" Type="geometry" Null="NO" Key="" Default="st_geometryfromtext('POLYGON((0 0, 0 0))')" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="location_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="sector" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="14" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="sector" Non_unique="0" Key_name="unique_sector_location_id_identifier" Seq_in_index="1" Column_name="location_id" Collation="A" Cardinality="14" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="sector" Non_unique="0" Key_name="unique_sector_location_id_identifier" Seq_in_index="2" Column_name="identifier" Collation="A" Cardinality="14" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="sector" Engine="InnoDB" Version="11" Row_format="Dynamic" Rows="14" Avg_row_length="1170" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="21" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="sector">
+                <trigger Trigger="sector_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.77">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `sector_before_insert` BEFORE INSERT ON `coldchain`.`sector`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="sector_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.78">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `sector_before_update` BEFORE UPDATE ON `coldchain`.`sector`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="sector_grid">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="position" Type="point" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="sector_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="sector_grid" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="sector_grid" Non_unique="1" Key_name="fk_sector_grid_sector_id" Seq_in_index="1" Column_name="sector_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="sector_grid" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="sector_grid">
+                <trigger Trigger="sector_grid_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-08-06 19:42:44.15">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `sector_grid_before_insert` BEFORE INSERT ON `coldchain`.`sector_grid`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="sector_grid_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-08-06 19:42:44.16">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `sector_grid_before_update` BEFORE UPDATE ON `coldchain`.`sector_grid`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="session">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="SessionID" />
+                <field Field="threshold_min" Type="float" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="threshold_max" Type="float" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="temperature_min" Type="float" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="temperature_max" Type="float" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="count" Type="int(11) unsigned" Null="NO" Key="" Default="0" Extra="" Comment="" />
+                <field Field="begin" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="on update current_timestamp(3)" Comment="" />
+                <field Field="end" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="timestamp_base" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="timestamp_start" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="timestamp_stop" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="interval" Type="int(10) unsigned" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="last_datapoint_time" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="MUL" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="session" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="85772" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="session" Non_unique="0" Key_name="unique_session_tag_id_identifier" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="14295" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="session" Non_unique="0" Key_name="unique_session_tag_id_identifier" Seq_in_index="2" Column_name="identifier" Collation="A" Cardinality="85772" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="session" Non_unique="1" Key_name="session_create_time" Seq_in_index="1" Column_name="create_time" Collation="A" Cardinality="21443" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="session" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="85772" Avg_row_length="128" Data_length="11026432" Max_data_length="0" Index_length="4227072" Data_free="4194304" Auto_increment="108071" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="session">
+                <trigger Trigger="session_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.22">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `session_before_insert` BEFORE INSERT ON `coldchain`.`session` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="session_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.23">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `session_before_update` BEFORE UPDATE ON `coldchain`.`session` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="session_identifier_seq">
+                <field Field="next_not_cached_value" Type="bigint(21)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="minimum_value" Type="bigint(21)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="maximum_value" Type="bigint(21)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="start_value" Type="bigint(21)" Null="NO" Key="" Extra="" Comment="start value when sequences is created or value if RESTART is used" />
+                <field Field="increment" Type="bigint(21)" Null="NO" Key="" Extra="" Comment="increment value" />
+                <field Field="cache_size" Type="bigint(21) unsigned" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="cycle_option" Type="tinyint(1) unsigned" Null="NO" Key="" Extra="" Comment="0 if no cycles are allowed, 1 if the sequence should begin a new cycle when maximum_value is passed" />
+                <field Field="cycle_count" Type="bigint(21)" Null="NO" Key="" Extra="" Comment="How many cycles have been done" />
+                <options Name="session_identifier_seq" Engine="InnoDB" Version="10" Row_format="Fixed" Rows="1" Avg_row_length="16384" Data_length="16384" Max_data_length="0" Index_length="0" Data_free="0" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <table_structure name="status">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="wifi" Type="tinyint(1)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="bluetooth" Type="tinyint(1)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="total_datapoints" Type="int(10) unsigned" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="last_datapoint" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="datapoint_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="status" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="254778624" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="status" Non_unique="1" Key_name="fk_status_datapoint_id" Seq_in_index="1" Column_name="datapoint_id" Collation="A" Cardinality="254778624" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="status" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="254778624" Avg_row_length="92" Data_length="23635574784" Max_data_length="0" Index_length="4138631168" Data_free="4194304" Auto_increment="271942814" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="status">
+                <trigger Trigger="status_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-01-16 15:08:43.91">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `status_before_insert` BEFORE INSERT ON `coldchain`.`status`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="status_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-01-16 15:08:43.92">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `status_before_update` BEFORE UPDATE ON `coldchain`.`status`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="store">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="code" Type="int(10) unsigned" Null="NO" Key="" Extra="" Comment="Unique code for each store" />
+                <field Field="name" Type="varchar(64)" Null="NO" Key="" Extra="" Comment="Name" />
+                <field Field="description" Type="varchar(255)" Null="NO" Key="" Extra="" Comment="Description" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="retail_network_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="store" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store" Non_unique="0" Key_name="unique_store_retail_network_id_code" Seq_in_index="1" Column_name="retail_network_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store" Non_unique="0" Key_name="unique_store_retail_network_id_code" Seq_in_index="2" Column_name="code" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store" Non_unique="0" Key_name="unique_store_retail_network_id_name" Seq_in_index="1" Column_name="retail_network_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store" Non_unique="0" Key_name="unique_store_retail_network_id_name" Seq_in_index="2" Column_name="name" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="store" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="49152" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="store">
+                <trigger Trigger="store_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.65">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`store_before_insert` BEFORE INSERT ON `coldchain`.`store`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="store_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.69">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`store_before_update` BEFORE UPDATE ON `coldchain`.`store`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="store_category">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="business_category_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="store_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="store_category" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store_category" Non_unique="0" Key_name="unique_store_category_business_category_id_store_id" Seq_in_index="1" Column_name="business_category_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store_category" Non_unique="0" Key_name="unique_store_category_business_category_id_store_id" Seq_in_index="2" Column_name="store_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="store_category" Non_unique="1" Key_name="fk_store_category_store_id" Seq_in_index="1" Column_name="store_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="store_category" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="49152" Data_free="0" Auto_increment="1" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="store_category">
+                <trigger Trigger="store_category_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.72">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`store_category_before_insert` BEFORE INSERT ON `coldchain`.`store_category`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="store_category_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="utf8" collation_connection="utf8_general_ci" Database_Collation="utf8_general_ci" Created="2019-07-11 18:17:43.76">
+<![CDATA[
+CREATE DEFINER=`root`@`%` TRIGGER IF NOT EXISTS `coldchain`.`store_category_before_update` BEFORE UPDATE ON `coldchain`.`store_category`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="tid" Type="varchar(32)" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="epc" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="alias" Type="varchar(32)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="last_datapoint_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="on update current_timestamp(3)" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="company_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="owner_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <field Field="place_tag_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="A tag might be installed on a static place" />
+                <key Table="tag" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="11150" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag" Non_unique="0" Key_name="unique_tag_tid_company_id" Seq_in_index="1" Column_name="tid" Collation="A" Cardinality="11150" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag" Non_unique="0" Key_name="unique_tag_tid_company_id" Seq_in_index="2" Column_name="company_id" Collation="A" Cardinality="11150" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag" Non_unique="1" Key_name="fk_tag_company_id" Seq_in_index="1" Column_name="company_id" Collation="A" Cardinality="12" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag" Non_unique="1" Key_name="fk_tag_owner_id" Seq_in_index="1" Column_name="owner_id" Collation="A" Cardinality="28" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag" Non_unique="1" Key_name="fk_tag_place_tag_id" Seq_in_index="1" Column_name="place_tag_id" Collation="A" Cardinality="2" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="11150" Avg_row_length="236" Data_length="2637824" Max_data_length="0" Index_length="983040" Data_free="0" Auto_increment="11163" Create_time="2020-03-12 14:32:23" Update_time="2020-04-09 11:12:48" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag">
+                <trigger Trigger="tag_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.23">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_before_insert` BEFORE INSERT ON `coldchain`.`tag` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.24">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_before_update` BEFORE UPDATE ON `coldchain`.`tag` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_coldchain">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="co_a" Type="double" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="co_b" Type="double" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="co_c" Type="double" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="co_d" Type="double" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="tag_coldchain" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="192" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_coldchain" Non_unique="1" Key_name="fk_tag_coldchain_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="192" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_coldchain" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="192" Avg_row_length="256" Data_length="49152" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="207" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_coldchain">
+                <trigger Trigger="tag_coldchain_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.26">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_coldchain_before_insert` BEFORE INSERT ON `coldchain`.`tag_coldchain` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_coldchain_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.26">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_coldchain_before_update` BEFORE UPDATE ON `coldchain`.`tag_coldchain` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_ehook">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="timestamp_base" Type="timestamp(3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="tag_group_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="tag_use_id" Type="int(10) unsigned" Null="YES" Key="MUL" Default="NULL" Extra="" Comment="" />
+                <key Table="tag_ehook" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="10273" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_ehook" Non_unique="0" Key_name="unique_tag_ehook_tag_id_tag_group_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="10273" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_ehook" Non_unique="0" Key_name="unique_tag_ehook_tag_id_tag_group_id" Seq_in_index="2" Column_name="tag_group_id" Collation="A" Cardinality="10273" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_ehook" Non_unique="1" Key_name="fk_tag_ehook_tag_group_id" Seq_in_index="1" Column_name="tag_group_id" Collation="A" Cardinality="733" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_ehook" Non_unique="1" Key_name="fk_tag_ehook_tag_use_id" Seq_in_index="1" Column_name="tag_use_id" Collation="A" Cardinality="6" Null="YES" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_ehook" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="10273" Avg_row_length="154" Data_length="1589248" Max_data_length="0" Index_length="557056" Data_free="4194304" Auto_increment="10996" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_ehook">
+                <trigger Trigger="tag_ehook_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.25">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_ehook_before_insert` BEFORE INSERT ON `coldchain`.`tag_ehook` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_ehook_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.26">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_ehook_before_update` BEFORE UPDATE ON `coldchain`.`tag_ehook` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_group">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="gid" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="Group ID" />
+                <field Field="key" Type="varchar(40)" Null="NO" Key="" Extra="" Comment="Group Key" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="tag_group" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="858" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_group" Non_unique="0" Key_name="unique_tag_group_gid" Seq_in_index="1" Column_name="gid" Collation="A" Cardinality="858" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_group" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="858" Avg_row_length="152" Data_length="131072" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="946" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_group">
+                <trigger Trigger="tag_group_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.24">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_group_before_insert` BEFORE INSERT ON `coldchain`.`tag_group` FOR EACH ROW SET NEW.`create_by` = CURRENT_USER(), NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_group_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-10-05 13:22:12.25">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_group_before_update` BEFORE UPDATE ON `coldchain`.`tag_group` FOR EACH ROW SET NEW.`update_by` = CURRENT_USER(), NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_item_history">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="begin" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="end" Type="timestamp(3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="item_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="tag_item_history" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="55" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_item_history" Non_unique="1" Key_name="fk_tag_item_history_item_id" Seq_in_index="1" Column_name="item_id" Collation="A" Cardinality="55" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_item_history" Non_unique="1" Key_name="fk_tag_item_history_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="55" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_item_history" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="55" Avg_row_length="297" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="70" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_item_history">
+                <trigger Trigger="tag_item_history_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.75">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `tag_item_history_before_insert` BEFORE INSERT ON `coldchain`.`tag_item_history`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_item_history_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.75">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `tag_item_history_before_update` BEFORE UPDATE ON `coldchain`.`tag_item_history`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_pack">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="pack_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="UNI" Extra="" Comment="" />
+                <key Table="tag_pack" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_pack" Non_unique="0" Key_name="unique_tag_pack_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_pack" Non_unique="1" Key_name="fk_tag_pack_pack_id" Seq_in_index="1" Column_name="pack_id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_pack" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="6" Avg_row_length="2730" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="10" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_pack">
+                <trigger Trigger="tag_pack_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-08-10 15:24:24.30">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `coldchain`.`tag_pack_before_insert` BEFORE INSERT ON `coldchain`.`tag_pack`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_pack_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-08-10 15:24:24.38">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `coldchain`.`tag_pack_before_update` BEFORE UPDATE ON `coldchain`.`tag_pack`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_sector_history">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="begin" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="last_update" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="end" Type="timestamp(3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="sector_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="tag_sector_history" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="35832" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_sector_history" Non_unique="1" Key_name="fk_tag_sector_history_sector_id" Seq_in_index="1" Column_name="sector_id" Collation="A" Cardinality="20" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_sector_history" Non_unique="1" Key_name="fk_tag_sector_history_tag_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="144" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_sector_history" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="35832" Avg_row_length="132" Data_length="4734976" Max_data_length="0" Index_length="3178496" Data_free="4194304" Auto_increment="35763" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_sector_history">
+                <trigger Trigger="tag_sector_history_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.78">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_sector_history_before_insert` BEFORE INSERT ON `coldchain`.`tag_sector_history`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_sector_history_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.79">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_sector_history_before_update` BEFORE UPDATE ON `coldchain`.`tag_sector_history`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_use">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="identifier" Type="varchar(32)" Null="NO" Key="UNI" Extra="" Comment="" />
+                <field Field="name" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="description" Type="varchar(128)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="tag_use" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_use" Non_unique="0" Key_name="unique_tag_use_identifier" Seq_in_index="1" Column_name="identifier" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_use" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="8192" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="3" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_use">
+                <trigger Trigger="tag_use_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.72">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_use_before_insert` BEFORE INSERT ON `coldchain`.`tag_use`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_use_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-05-02 19:13:45.72">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `tag_use_before_update` BEFORE UPDATE ON `coldchain`.`tag_use`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="tag_wanted">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="begin" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="on update current_timestamp(3)" Comment="" />
+                <field Field="end" Type="timestamp(3)" Null="YES" Key="" Default="NULL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="tag_wanted" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_wanted" Non_unique="0" Key_name="unique_tag_wanted_tag_id_begin" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="tag_wanted" Non_unique="0" Key_name="unique_tag_wanted_tag_id_begin" Seq_in_index="2" Column_name="begin" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="tag_wanted" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="16384" Max_data_length="0" Index_length="16384" Data_free="0" Auto_increment="18" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="tag_wanted">
+                <trigger Trigger="tag_wanted_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-03-18 11:54:44.19">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `tag_wanted_before_insert` BEFORE INSERT ON `coldchain`.`tag_wanted`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="tag_wanted_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-03-18 11:54:44.19">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER IF NOT EXISTS `tag_wanted_before_update` BEFORE UPDATE ON `coldchain`.`tag_wanted`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="user">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="username" Type="varchar(30)" Null="NO" Key="UNI" Extra="" Comment="Username to login" />
+                <field Field="email" Type="varchar(64)" Null="NO" Key="UNI" Extra="" Comment="User email" />
+                <field Field="password" Type="varchar(128)" Null="NO" Key="" Extra="" Comment="User password" />
+                <field Field="confirmed_at" Type="timestamp(3)" Null="NO" Key="" Default="'0000-00-00 00:00:00.000'" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="user" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="59" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="user" Non_unique="0" Key_name="unique_user_username" Seq_in_index="1" Column_name="username" Collation="A" Cardinality="59" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="user" Non_unique="0" Key_name="unique_user_email" Seq_in_index="1" Column_name="email" Collation="A" Cardinality="59" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="user" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="59" Avg_row_length="277" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="69" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="user">
+                <trigger Trigger="user_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.31">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `user_before_insert` BEFORE INSERT ON `coldchain`.`user`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="user_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.32">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `user_before_update` BEFORE UPDATE ON `coldchain`.`user`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="usercompany">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="user_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="company_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <key Table="usercompany" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="111" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="usercompany" Non_unique="0" Key_name="unique_usercompany_user_id_company_id" Seq_in_index="1" Column_name="user_id" Collation="A" Cardinality="111" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="usercompany" Non_unique="0" Key_name="unique_usercompany_user_id_company_id" Seq_in_index="2" Column_name="company_id" Collation="A" Cardinality="111" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="usercompany" Non_unique="1" Key_name="fk_usercompany_company_id" Seq_in_index="1" Column_name="company_id" Collation="A" Cardinality="111" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="usercompany" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="111" Avg_row_length="147" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="129" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="usercompany">
+                <trigger Trigger="usercompany_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-08 15:40:51.01">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `usercompany_before_insert` BEFORE INSERT ON `coldchain`.`usercompany`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="usercompany_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-02-08 15:40:51.02">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `usercompany_before_update` BEFORE UPDATE ON `coldchain`.`usercompany`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="userrole">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="user_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="role_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="userrole" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="53" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="userrole" Non_unique="0" Key_name="unique_user_has_role_user_id_role_id" Seq_in_index="1" Column_name="user_id" Collation="A" Cardinality="53" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="userrole" Non_unique="0" Key_name="unique_user_has_role_user_id_role_id" Seq_in_index="2" Column_name="role_id" Collation="A" Cardinality="53" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="userrole" Non_unique="1" Key_name="fk_user_has_role_role_id" Seq_in_index="1" Column_name="role_id" Collation="A" Cardinality="6" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="userrole" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="53" Avg_row_length="309" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="63" Create_time="2020-03-10 12:27:42" Update_time="2020-04-09 11:12:46" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="userrole">
+                <trigger Trigger="user_has_role_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.39">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `user_has_role_before_insert` BEFORE INSERT ON `userrole` FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="user_has_role_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2018-06-21 17:21:20.39">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `user_has_role_before_update` BEFORE UPDATE ON `userrole` FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+        <table_structure name="zone_calibration">
+                <field Field="id" Type="int(10) unsigned" Null="NO" Key="PRI" Extra="auto_increment" Comment="" />
+                <field Field="rssi" Type="int(11)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" Comment="" />
+                <field Field="create_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="create_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="update_by" Type="varchar(32)" Null="NO" Key="" Extra="" Comment="" />
+                <field Field="update_time" Type="timestamp(3)" Null="NO" Key="" Default="current_timestamp(3)" Extra="" Comment="" />
+                <field Field="tag_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <field Field="appinstance_id" Type="int(10) unsigned" Null="NO" Key="MUL" Extra="" Comment="" />
+                <key Table="zone_calibration" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="zone_calibration" Non_unique="0" Key_name="unique_zone_calibration_tag_id_appinstance_id" Seq_in_index="1" Column_name="tag_id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="zone_calibration" Non_unique="0" Key_name="unique_zone_calibration_tag_id_appinstance_id" Seq_in_index="2" Column_name="appinstance_id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <key Table="zone_calibration" Non_unique="1" Key_name="fk_zone_calibration_appinstance_id" Seq_in_index="1" Column_name="appinstance_id" Collation="A" Cardinality="2" Null="" Index_type="BTREE" Comment="" Index_comment="" />
+                <options Name="zone_calibration" Engine="InnoDB" Version="10" Row_format="Dynamic" Rows="2" Avg_row_length="8192" Data_length="16384" Max_data_length="0" Index_length="32768" Data_free="0" Auto_increment="92481" Create_time="2020-03-10 12:27:42" Collation="utf8_general_ci" Create_options="" Comment="" Max_index_length="0" Temporary="N" />
+        </table_structure>
+        <triggers name="zone_calibration">
+                <trigger Trigger="zone_calibration_before_insert" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-07-02 19:10:16.56">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `zone_calibration_before_insert` BEFORE INSERT ON `coldchain`.`zone_calibration`
+FOR EACH ROW
+    SET NEW.`create_by` = CURRENT_USER(),
+        NEW.`update_by` = CURRENT_USER()
+]]>
+                </trigger>
+                <trigger Trigger="zone_calibration_before_update" sql_mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" character_set_client="latin1" collation_connection="latin1_swedish_ci" Database_Collation="utf8_general_ci" Created="2019-07-02 19:10:16.57">
+<![CDATA[
+CREATE DEFINER=`root`@`localhost` TRIGGER `zone_calibration_before_update` BEFORE UPDATE ON `coldchain`.`zone_calibration`
+FOR EACH ROW
+    SET NEW.`update_by` = CURRENT_USER(),
+        NEW.`update_time` = CURRENT_TIMESTAMP(3)
+]]>
+                </trigger>
+        </triggers>
+</database>
+</mysqldump>

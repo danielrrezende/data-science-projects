@@ -1,0 +1,189 @@
+Sobre a seleção de features:
+	- as colunas: create_by, create_time, update_by e update_time de todas as tabelas são colunas de auditoria e não devem ser consideradas no modelo
+	- Apenas dados relacionados a eHooks e Smartphones devem ser considerados, os dados relacionados a coldchain podem ser descartados.
+
+Sobre smartphone: 
+	- com aplicativo que integra com o #tag/eTracker, este se comporta como o SLS, lendo os eHooks que estão próximos e reportando para o servidor
+	- A cada 30 mins, o celular envia os dados sobre seu status atual: localização, bt ligado ou desligado, wifi ligado ou desligado, etc.
+	- Um dos objetivos do modelo é saber as chances de leituras, nos diferentes locais, baseado neste report dos celulares
+	- A informação da localização do celular, sozinha, não vai dar a informação necessária
+
+
+- Os SLSs da Dutra já tem eHooks. Nós já conseguimos medir quantas vezes eles estão sendo lidos, a cada hora, em qual posição da rodovia.
+
+uma session está ligada a múltiplas leituras. Por exemplo, uma session pode ser um intervalo de 24h de viagem de um caminhão. Então vc vai ter 24h de leituras, todas atreladas a esta session.
+
+
+"coldchain" - tags que medem a temperatura
+
+'temperature' estará preenchido,
+'latitude' e 'longitude' vai ser nulo,
+'session_id' estará preenchido,
+'appinstance_id' estará preenchido,
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+"eHook" - um eHook foi encontrado por um celular ou SLS
+
+'temperature' será nulo,
+'latitude' e 'longitude' só será preenchido se o dispositivo que leu (celular ou SLS) tiver tido condições de aferir a localização, em muitos casos o celular leu o eHook mas ainda não aferiou sua 
+geolocalização, então vem como nulo, quando temos SLS em laboratório/teste/estoque, também colocamos lat/lon como nulo, para não enviar geolocalização errada,
+'session_id' estará preenchido,
+'appinstance_id' estará preenchido,
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+"Status do celular" - o celular não viu nenhum eHook, mas envia seu status para ser monitorado pelo servidor - 
+Esta tupla terá uma tupla relacionada na tabela status, isto é haverá um status.datapoint_id = datapoint.id
+
+'temperatura' será nulo,
+'latitude' e 'longitude' provavelmente preenchido (mesmos critérios do eHook),
+'session_id' será nulo,
+'appinstance_id' estará preenchido,
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+'Relações'
+status.datapoint_id = datapoint.id
+
+datapoint.datetime = session.last_datapoint_time = tag.last_datapoint_time
+
+datapoint.session_id = session.id
+
+datapoint.appinstance_id = appinstance.id
+
+session.tag_id = tag.id
+
+appinstance.reporter_id = reporter.id
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+'A ser definido':
+1) quais dados de longitude e latitude são referentes a dutra e fernão dias (tabela datapoint)
+
+
+'mensagens:'
+Sugiro vc pegar um conjunto de N pontos da Dutra, um por KM, por exemplo. Dai fazer uma query que pegue todos os pontos que estão a distância <= a 700m (por exemplo) de algum ponto.
+se vc conseguir estes dados, talvez já seja interessante até classificar, no resultado da sua consulta, em qual KM cada aferição aconteceu.
+vc pode pegar o google maps, por exemplo e extrair o lat/lon de cada KM da Dutra de lá.
+
+latitude (norte / sul)            (110 metros)
+longitude (leste / oeste)         (100 metros)
+
+                          latitude,  longitude                        KM
+
+kms repetidos =                                                       km 164 até 232 
+
+
+inicio da dutra em rj = -22.816864, -43.323290                        km 164 até 333
+
+fim da dutra em sp    = -23.525527, -46.587798                        km 0 até 232
+
+ponto mais ao norte   = -22.449197, -44.320930   	norte -22.449197
+
+ponto mais ao sul     = -23.525527, -46.587798   	sul   -23.525527
+
+ponto mais a leste    = -22.816864, -43.323290   	leste -43.323290
+
+ponto mais oeste      = -23.525527, -46.587798   	oeste -46.587798
+
+'query modelo: (a definir)'
+SELECT id, datetime, latitude, longitude, session_id, appinstance_id 
+FROM coldchain.datapoint 
+WHERE (latitude BETWEEN -23.525527 AND -22.449197) AND (longitude BETWEEN -46.587798 AND -43.323290) AND (session_id IS NOT null)
+LIMIT 2000000;
+
+'Como capturar todos as coordenadas de rodovia:'
+No google earth, em obter rotas, colocar origem e destino, formato from:-23.525527, -46.587798 to:-22.817168, -43.322999;
+Copiar os resultados para arquivo KML, neste estará as coordenadas. Edite ate ficar no formato -23.525527, -46.587798;
+Salve em csv;
+
+
+'Subtarefas'
+Pegar pontos que não tem nada a ver com a rodovia e corrigir;  'não precisa mais'
+Fazer unique das coordenadas extraidas do DB;  'não precisa mais'
+
+2) A partir de cada KM catalogado, criar uma query que extraia todas as leituras feitas nestes KM, num raio de 700m aproximadamente e dos ultimos X dias.
+Primeira versão da query
+
+'''SELECT id, datetime, latitude, longitude, geo_accuracy, session_id, appinstance_id
+                                    FROM coldchain.datapoint
+                                    WHERE (latitude BETWEEN -23.527 AND -23.525)
+                                    AND (longitude BETWEEN -46.589 AND -46.587)
+                                    AND (geo_accuracy <= 700)
+                                    AND (session_id IS NOT null)
+                                    AND (appinstance_id IS NOT NULL)
+                                    AND (temperature IS NULL)
+                                    ORDER BY datetime DESC
+                                    ;'''
+
+3) Definir o que são dados de ehook dos dados de reporters
+	De onde extrair os dados de reporters e os dados de ehooks
+		'reporters'
+			datapoint.appinstance_id = appinstance.id
+			appinstance.reporter_id = reporter.id
+			reporter.reporterdevice_id = reporterdevice.id
+			reporterdevice.deviceosversion_id = deviceosversion.id
+
+		'ehooks'
+			datapoint.session_id = session.id
+			session.tag_id = tag.id 
+			session.tag_id = tag_ehook.tag_id
+			tag.id = tag_ehook.tag_id
+
+
+
+	A partir dos reporters, extrair as leituras de ehook no KM
+
+4) quantidade de reporters (SLS ou smartphone) por trecho de rodovia (tabela reporter)
+5) quantidade de leituras de ehook feitas por cada reporter (tabela reporter)
+
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+
+calculo 'fator x'
+
+- para cada SLS da rodovia dutra, ver a quantidade de celulares que passaram neste SLS e quantas leituras foram feitas
+ex: KM 10, passaram 35 celulares e leram o ehook 350 vezes, então o fator X é igual a 10
+
+35/350 = 10
+
+filtras apenas as leituras dos celulares, excluindo os dados de leituras vindas do SLS
+
+WHERE reporter.identifier NOT LIKE 'gf.322%'...
+ou
+
+WHERE reporterdevice_id IS NOT NULL
+
+
+1) extrair a quantidade de celulares resp: count(distinct d.appinstance_id) AS 'nro_smartphones',
+2) calcular fator X (quantidade de celulares / quantidade de leituras) e ver a diferença de valores de fator X para todo o trecho e 
+3)excluir as leituras feitas por SLS resp: WHERE reporter.device_id IS NOT NULL
+
+Fator X calculado
+
+'proximos passos'
+
+Para os kms que foram contabilizados a quantidade STATUS de celulares e que não há leituras, preencher a quantidade de leituras multiplicando pelo fato x
+Quando há leituras e não há STATUS de celulares, duvidir a quantidade de leituras pelo fator X, usar função round para arredondar valores, caso haja apenas uma leituras, colocar como 1 STATUS para o km
+	haverá kms em que certos dias que não leituras de STATUS de celulares e nem leituras de ehooks, contabilizar isso e ver o que fazer
+
+para os kms sem nenhuma informação, o que fazer? prever? este problema aparecera nas outras rodovias
+	haverá captura de STATUS dos celulares, mas como o fator X será calculado neste caso?, pois não haverá quantidade de leituras totais no dia para se chegar ao fator x
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+dutra = SLS fixo e celulares
+quantidade de reporters(leitores) num trecho na dutra 'VS' quantidade de leituras de ehook = fator x 
+
+
+vi X celulares em um trecho em um tempo
+
+Y leituras
+
+
+fernao = apenas celulares

@@ -1,0 +1,63 @@
+ssh-keygen - gerador de ssh
+
+cat sshfile - editar
+
+ssh fedora@34.203.247.123 - login
+
+ssh -N -f -L 3306:localhost:3306 fedora@34.203.247.123
+
+ssh -N -f -L 3307:localhost:3306 fedora@ehook-replica-mariadb 
+
+-------------------------------------------------
+tabelas principais:
+
+'datapoint' - Cada tupla da tabela representa uma (i) leitura de eHook/tag OU (ii) uma localização aferida pelo smartphone. Caso (i), a coluna `session_id` será diferente de nulo, caso (ii) `session_id` será nulo, indicando que não a tupla não tem relação com tag, apenas com o escanner/celular.
+
+'session' session_id(datapoint) - Um tag/eHook/#tag pode ter múltiplas sessões. Cada sessão possui múltiplas leituras atreladas. É apenas uma organização das leituras em um dado contexto. No logger do coldchain é uma viagem que o logger faz, no eHook está em desuso, apesar da estrutura ser populada - 
+
+'tag' tag_id(session) - Um tag pode ser um logger ColdChain, tag 915MHz PA, eHook, etc. Cada eHook também possui uma tupla na tabela tag_ehook, que permite determinar quais tuplas da tabela tag são referentes a eHooks
+
+'appinstance' appinstance_id(datapoint) - representa a instalação de um App, integrado à lib Android/iOS eTracker, em um aparelho celular. Um aparelho pode ter múltiplos aplicativos que implementam a eTracker. Cada tupla da tabela datapoint necessariamente tem um appinstance associado, que é de onde veio o dado
+
+'reporter' reporter_id(appinstance) - o aparelho celular, ou dispositivo dedicado de leitura de eHooks / #tag
+
+-------------------------------------------------
+base coldchain:
+
+mysql -u root -h 127.0.0.1 coldchain
+mysql -u root -h 127.0.0.1 --port=3307 coldchain
+
+'root'
+sudo su
+
+show full processlist;
+KILL SOFT QUERY ID
+SHOW INDEX FROM table
+show columns from table
+
+Para 'Waiting for table metadata lock':
+show engine innodb status;
+Vá para a categoria 'transaction' e procure pela ID do thread:
+KILL id 16;
+systemctl restart mariadb
+
+checar e reparar tabelas:
+mysqlcheck -u root -h 127.0.0.1 -p --check coldchain
+mysqlcheck -u root -h 127.0.0.1 -p --repair coldchain
+
+-------------------------------------------------
+comandos:
+
+SELECT * FROM tag ORDER BY id DESC LIMIT 10;
+
+SELECT id, datetime, latitude, longitude, session_id, appinstance_id FROM coldchain.datapoint WHERE (latitude BETWEEN -23 AND -22) AND (longitude BETWEEN -46 AND -45) AND (session_id IS NOT NULL) LIMIT 10;
+
+-------------------------------------------------
+ampere
+hertz
+coulomb
+tesla
+-------------------------------------------------
+site:
+
+https://stackoverflow.com/questions/21903411/enable-python-to-connect-to-mysql-via-ssh-tunnelling

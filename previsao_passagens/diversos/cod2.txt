@@ -1,0 +1,30 @@
+start=timeit.default_timer()
+
+df_dutra_kms = pd.read_sql_query('''select k.km, count(*)
+                                    from dutra_kms k, (
+                                      select 
+                                        #CAST(sum(CASE WHEN HOUR(d.datetime) BETWEEN 00 AND 05 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 ELSE 0 END) AS SIGNED) AS esp_00h_06hs,
+                                        #CAST(sum(CASE WHEN HOUR(d.datetime) BETWEEN 06 AND 11 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 ELSE 0 END) AS SIGNED) AS esp_06_12hs,
+                                        #CAST(sum(CASE WHEN HOUR(d.datetime) BETWEEN 12 AND 17 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 ELSE 0 END) AS SIGNED) AS esp_12_18,
+                                        #CAST(sum(CASE WHEN HOUR(d.datetime) BETWEEN 18 AND 23 AND MINUTE(d.datetime) BETWEEN 00 AND 59 THEN 1 ELSE 0 END) AS SIGNED) AS esp_18_24hs, 
+                                        d.datetime,
+                                        d.longitude, d.latitude
+                                      from datapoint d, session s
+                                      where d.datetime > '2020-03-07' - interval 1 day
+                                        and d.datetime < '2020-03-07'
+                                        and d.geo_accuracy <= 700
+                                        and d.temperature is null
+                                        and s.id = d.session_id
+                                    ) x
+                                    where x.longitude > k.long_min
+                                      and x.longitude < k.long_max
+                                      and x.latitude > k.lat_min
+                                      and x.latitude < k.lat_max
+                                      and k.id <= 10
+                                    group by k.km
+                                    order by k.km;''', connection)
+end=timeit.default_timer()
+
+check_time(start, end)
+
+df_dutra_kms

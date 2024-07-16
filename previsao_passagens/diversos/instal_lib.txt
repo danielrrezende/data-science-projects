@@ -1,0 +1,19 @@
+cd\
+
+c:
+
+cd C:\Users\Admin\AppData\Local\Programs\Python\Python37\Scripts
+
+pip install --upgrade setuptools
+
+pip install --upgrade pip
+
+pip install --upgrade wheel
+
+pip install tensorflow
+
+pip install --user numpy scipy sklearn matplotlib ipython pandas sympy nose eli5 xgboost PDPbox seaborn tweepy jsonpickle nltk textblob pandas-datareader pillow request psutil xlrd statsmodels functions Agent vaderSentiment googletrans gTTS-token Cython paramiko mysql-connector-python sshtunnel h5py geocoder geopy folium keras
+
+pip install --upgrade tensorflow
+
+pause

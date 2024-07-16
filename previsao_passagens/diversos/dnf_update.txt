@@ -1,0 +1,107 @@
+dnf update
+df -Th
+vim /etc/hostname
+vim /etc/my.cnf
+cat /etc/my.cnf
+sestatus
+vim /etc/sestatus.conf
+vim /etc/selinux/config
+setenforce 0
+sestatus
+
+mysqltuner.pl --skippassword --host 127.0.0.1
+
+sudo tee /etc/yum.repos.d/mariad.repo<<EOF
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.4/fedora30-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF
+
+dnf update
+dnf remove mariadb*
+dnf install mariadb-server
+
+systemctl start mariadb
+systemctl status mariadb
+
+mysql -u root coldchain
+mysql -u root
+
+vim /etc/my.cnf.d/server.cnf
+
+systemctl restart mariadb
+
+mysql -u root
+mysql -u root -h 127.0.0.1
+mysql -u root -h 127.0.0.1 coldchain
+
+dnf install iotop
+iotop
+htop
+dmesg
+fdisk -l
+mount /dev/xvdf1 /opt/
+uname -a
+cd /opt/
+ls
+cd backoffice/database/
+ls
+cd data/
+ls
+df -Th
+dnf install mariadb
+dnf install vim git htop -y
+cd
+
+dnf install mariadb-server
+vim /etc/my.cnf.d/mariadb-server.cnf
+
+systemctl status mariadb
+systemctl start mariadb
+systemctl status
+systemctl status mariadb
+
+cd /opt/backoffice/database/
+ls
+cd data/
+ls
+ls -lhat
+
+chown -R mysql.mysql *
+chown -R mysql.mysql .
+
+systemctl restart mariadb
+
+journalctl -u mariadb -f
+
+systemctl stop mariadb
+systemctl start mariadb
+systemctl status mariadb
+
+journalctl -u mariadb -f
+
+mysqld
+mysql_upgrade
+mysqld_safe ./
+
+ps
+mysqld_safe ./
+echo $?
+ps aux | grep -i mysql
+journalctl -u mariadb -f
+
+mysql
+mysql -h 127.0.0.1
+systemctl start mariadb
+journalctl -xe
+pwd
+journalctl -u mariadb -f
+mysql -u root -h 127.0.0.1 coldchain
+ping
+ping 127.0.0.1
+mysql
+journalctl -u mariadb -f
+mysql
+systemctl status mariadb
