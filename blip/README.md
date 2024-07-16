@@ -1,5 +1,6 @@
 # Introdução ao Desafio
-Estamos em busca de um Cientista de Dados Pleno apaixonado por tecnologia de ponta e pela criação de soluções de IA que impactem diretamente o negócio da empresa. Este desafio técnico é projetado para avaliar suas habilidades em planejamento de solução de problemas, análise de dados, modelagem preditiva e interpretação de resultados. 
+
+Este desafio técnico é projetado para avaliar suas habilidades em planejamento de solução de problemas, análise de dados, modelagem preditiva e interpretação de resultados. 
 Considere o desafio da competição "LMSys Chatbot Arena" no Kaggle (acessivel em https://www.kaggle.com/competitions/lmsys-chatbot-arena/overview ), que contém prompts e respostas geradas por dois modelos distintos. A proposta desse desafio do Kaggle é criar uma solução que possa inferir qual dos dois modelos gerou a resposta de melhor qualidade, considerando que o empate é uma opção válida.
 Seu objetivo será propor e defender uma solução viável de ser implementada para solucionar o desafio. Não será obrigatório a implementação da mesma, mas lembre-se que você deverá explicar seu funcionamento e ter justificativas para cada decisão técnica. Durante a entrevista, iremos conversar sobre a solução proposta.
 
