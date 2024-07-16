@@ -1,0 +1,31 @@
+﻿Variaveis de entrada:
+
+   # dados dos clientes do banco
+
+   1 - age: (numérica)
+   2 - job: tipo de emprego (categórico: "admin.", "Desconhecido", "desempregado", "gerente", "empregada doméstica", "empresário", "estudante", "colarinho azul", "autônomo", "aposentado", "técnico", "serviços")
+   3 - marital: estado civil (categórico: "casado", "divorciado", "solteiro"; nota: "divorciado" significa divorciado ou viúvo)
+   4 - education: (categórica: "desconhecida", "secundária", "primária", "terciária")
+   5 - default: tem crédito em default? (binário: "sim", "não")
+   6 - balance: saldo médio anual, em euros (numérico)
+   7 - housing: tem empréstimo habitacional? (binário: "sim", "não")
+   8 - loan: tem empréstimo pessoal? (binário: "sim", "não")
+
+   # relacionado ao último contato da campanha atual:
+
+   9 - contact: tipo de comunicação de contato (categórico: "desconhecido", "telefone", "celular")
+  10 - day: último dia de contato do mês (numérico)
+  11 - month: mês do último contato do ano (categórico: "jan", "fev", "mar", ..., "nov", "dec")
+  12 - duration: duração do último contato, em segundos (numérico)
+
+   # outros atributos:
+
+  13 - campaign: número de contatos realizados durante esta campanha e para este cliente (numérico, inclui o último contato)
+  14 - pdays: número de dias que passaram depois que o cliente foi contatado pela última vez de uma campanha anterior (numérico, -1 significa que o cliente não foi contatado anteriormente)
+  15 - previous: número de contatos realizados antes desta campanha e para este cliente (numérico)
+  16 - poutcome: resultado da campanha de marketing anterior (categórico: "desconhecido", "outro", "fracasso", "sucesso")
+
+  # Variável de saída (alvo desejado):
+  17 - y - o cliente assinou um depósito a prazo? (binário: "sim", "não")
+
+8. Atributos ausentes: Nenhum

@@ -1,0 +1,22 @@
+olhar o que é:
+metodo de regressão linear - grafico que apresenta tendencias em cores menos escuras
+classificação linear
+
+
+
+avaliar os riscos baseado em alguns dados disponiveis em sites publicos
+
+nos dados:
+- localização das barragens, latitude, longitude, etc
+- informações do censo de 2017 e dados climaticos
+
+
+coisas a analisar:
+
+areas de provaveis acidentes: 
+ - analisar onde dados houve acidentes mariana e brumadinho e procurar locais com
+   caracteristicas proximas
+
+ - ver se é possivel fazer predições de novos acidentes
+
+ - foco em saúde, tentar analisar algo neste sentido, olhar o site algumas ideias que possam estar disponiveis
