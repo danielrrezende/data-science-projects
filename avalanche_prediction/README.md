@@ -1,45 +1,30 @@
-# Introdução ao Desafio
+# Teste de Análise de Dados
 
-Este desafio técnico é projetado para avaliar suas habilidades em planejamento de solução de problemas, análise de dados, modelagem preditiva e interpretação de resultados. 
-Considere o desafio da competição "LMSys Chatbot Arena" no Kaggle (acessivel em https://www.kaggle.com/competitions/lmsys-chatbot-arena/overview ), que contém prompts e respostas geradas por dois modelos distintos. A proposta desse desafio do Kaggle é criar uma solução que possa inferir qual dos dois modelos gerou a resposta de melhor qualidade, considerando que o empate é uma opção válida.
-Seu objetivo será propor e defender uma solução viável de ser implementada para solucionar o desafio. Não será obrigatório a implementação da mesma, mas lembre-se que você deverá explicar seu funcionamento e ter justificativas para cada decisão técnica. Durante a entrevista, iremos conversar sobre a solução proposta.
+A intenção desse teste é verificar a capacidade analítica de análise de dados e análise crítica. Não há resposta certa ou errada, mas tudo depende do que for apresentado.
+Tragédia de Brumandinho/MG
+Fonte: https://www.kaggle.com/edumagalhaes/brazilian-dams-and-brumadinho-households
 
-## Detalhes
-●	Base de Dados: Ao se inscrever no desafio, o Kaggle irá liberar acesso a um conjunto de dados de treino e de teste com prompts e as respostas de dois modelos diferentes para cada prompt.
+## Contexto
+Os dados se referem a questões demográficas da cidade de Brumadinho, cidade que foi vítima da tragédia com o rompimento da barragem de minério recentemente. A ideia é avaliar os riscos baseado em alguns dados disponíveis em sites públicos, como IBGE (Instituto Brasileiro de Geografia e Estatística) e Agência Nacional do Mineração (ANM). Nos dados há a localização das barragens, latitude, longitude, etc. Além disso, também há informações do Censo de 2017 e dados climáticos.
+No link informado acima há a descrição de cada base de dados e sua composição. Qualquer dúvida é só acessar a página. Detalhe: Há algumas análises disponíveis no site. Elas podem ser utilizadas para dar uma ideia do que pode ser feito, mas caso seja uma cópia, a desclassificação ocorrerá instantaneamente. Lembrando que a empresa tem foco em saúde, então qualquer análise nesse sentido é um diferencial!
 
-●	Tarefa do desafio: Propor, documentar e defender uma solução que possa determinar qual resposta é melhor, ou se há um empate, com base em critérios definidos por você. A forma de documentação e apresentação é livre, e a defesa ocorrerá durante a entrevista.
+### Principais aspectos a serem observados com a base de dados:
 
-●	Critérios de Avaliação:
+1) Capacidade de análise da base de dados de forma a avaliar inconsistências e possíveis falhas.
+   
+2) Capacidade de construção de dashboard utilizando Excel, PowerBI, Pyhton, R, Tableau ou qualquer outra ferramenta. Detalhe: Algumas ferramentas são pagas, mas há possibilidade de utilizar versões de teste. Assim, escolha a ferramenta que você domina mais. #ficaadica: utilização de PowerBI, Tableau e Python é um diferencial!
+   
+3) Aplicação de qualquer metodologia estatística, desde um simples teste de hipótese ou modelo de regressão. Qualquer utilização de metodologia estatística deve ser justificada.
 
-  1.	Justificativa da escolha do modelo e das técnicas utilizadas.
-  
-  2.	Clareza e eficácia da explicação dos resultados e do processo.
-  
-  3.	Complexidade da solução.
-  
-  4.	Discussão de prós e contras da solução e alternativas.
-  
+4) Domínio de exploração de dados utilizando análise gráfica e tabelas.
 
-## Dicas
-●	Geral: Você não terá muito tempo para ficar pensando nas coisas, então saiba priorizar.
+5) Nível de programação na linguagem adotada
 
-●	Sobre Kaggle: Se você não conhece o Kaggle, esse pode ser um bom lugar para se familiarizar com as competições 
-(https://www.kaggle.com/docs/competitions), e se tiver interesse, aproveite os códigos públicos para se inspirar.
+6)  Busca por informações extras para complementação das análises
 
-●	Feature Engineering: Conheça os dados e considere criar novas features a partir dos dados brutos que possam ajudar o modelo a fazer previsões mais precisas.
 
-●	Modelagem: Fique a vontade para considerar diferentes algoritmos e técnicas.
-
-●	Material externo: Sinta se à vontade para utilizar e aproveitar de materiais e ferramentas externas como ChatGPT, Copilot e afins.
-
-## Considerações Finais
-Durante a entrevista, pediremos que você apresente a sua solução para o problema. Ao final da nossa conversa, pediremos que você submeta o material que tiver construído para a Blip, por email.
-
-1.	Uma breve apresentação no seu formato favorito (Slides, Diagrama, etc) apresentando um desenho de uma possível solução.
-a.	Não precisa ser algo formal, mas queremos entender sua linha de raciocínio.
-
-3.	[Opcional] - O link com o código completo submetido publicamente de forma similar ao exemplo https://www.kaggle.com/code/awsaf49/lmsys-kerasnlp-starter .
-a.	Atenção! Compartilhamento de códigos de competições ativas no Kaggle devem ser públicas
-Este desafio não é apenas uma oportunidade de mostrar suas habilidades técnicas, mas também sua capacidade de comunicar resultados complexos de forma clara e eficiente. Boa sorte!
-Se tiver dúvidas durante o desafio, não hesite em entrar em contato. Estamos ansiosos para ver sua abordagem e solução para este problema!
-
+### Apresentação (fique à vontade para escolher umas das duas opções)
+1) Apresentação em Power Point contendo a storytelling (ou uma ordem lógica de análise) contendo todos os resultados obtidos (lembre-se do que é importante e objetividade é primordial!)
+   
+2) Apresentação em Excel ou outra ferramenta de visualização de relatórios (dashboards) na qual seja possível visualizar todos os resultados obtidos de forma bem interessante
+Lembrando que a capacidade de passar a informação é muito importante
