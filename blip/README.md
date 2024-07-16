@@ -1,57 +1,44 @@
-# Data Science applied to maintenance planning optimization
+# Introdução ao Desafio
+Estamos em busca de um Cientista de Dados Pleno apaixonado por tecnologia de ponta e pela criação de soluções de IA que impactem diretamente o negócio da empresa. Este desafio técnico é projetado para avaliar suas habilidades em planejamento de solução de problemas, análise de dados, modelagem preditiva e interpretação de resultados. 
+Considere o desafio da competição "LMSys Chatbot Arena" no Kaggle (acessivel em https://www.kaggle.com/competitions/lmsys-chatbot-arena/overview ), que contém prompts e respostas geradas por dois modelos distintos. A proposta desse desafio do Kaggle é criar uma solução que possa inferir qual dos dois modelos gerou a resposta de melhor qualidade, considerando que o empate é uma opção válida.
+Seu objetivo será propor e defender uma solução viável de ser implementada para solucionar o desafio. Não será obrigatório a implementação da mesma, mas lembre-se que você deverá explicar seu funcionamento e ter justificativas para cada decisão técnica. Durante a entrevista, iremos conversar sobre a solução proposta.
 
-## Summary
-Situation
-About the database
-Challenge Activities
+## Detalhes
+●	Base de Dados: Ao se inscrever no desafio, o Kaggle irá liberar acesso a um conjunto de dados de treino e de teste com prompts e as respostas de dois modelos diferentes para cada prompt.
 
-## Situation 
-A new data science consulting company was hired to solve and improve the maintenance planning of an outsourced transport company. The company maintains an average number of trucks in its fleet to deliver across the country, but in the last 3 years it has been noticing a large increase in the expenses related to the maintenance of the air system of its vehicles, even though it has been keeping the size of its fleet relatively constant. The maintenance cost of this specific system is shown below in dollars:
+●	Tarefa do desafio: Propor, documentar e defender uma solução que possa determinar qual resposta é melhor, ou se há um empate, com base em critérios definidos por você. A forma de documentação e apresentação é livre, e a defesa ocorrerá durante a entrevista.
 
- 
-Your objective as a consultant is to decrease the maintenance costs of this particular system. Maintenance costs for the air system may vary depending on the actual condition of the truck. 
+●	Critérios de Avaliação:
 
--	If a truck is sent for maintenance, but it does not show any defect in this system, around $10 will be charged for the time spent during the inspection by the specialized team.
--	If a truck is sent for maintenance and it is defective in this system, $25 will be charged to perform the preventive repair service.
--	If a truck with defects in the air system is not sent directly for maintenance, the company pays $500 to carry out corrective maintenance of the same, considering the labor, replacement of parts and other possible inconveniences (truck broke down in the middle of the track for example).
+  1.	Justificativa da escolha do modelo e das técnicas utilizadas.
+  
+  2.	Clareza e eficácia da explicação dos resultados e do processo.
+  
+  3.	Complexidade da solução.
+  
+  4.	Discussão de prós e contras da solução e alternativas.
+  
 
-During the alignment meeting with those responsible for the project and the company's IT team, some information was given to you:
+## Dicas
+●	Geral: Você não terá muito tempo para ficar pensando nas coisas, então saiba priorizar.
 
--	The technical team informed you that all information regarding the air system of the paths will be made available to you, but for bureaucratic reasons regarding company contracts, all columns had to be encoded. 
--	The technical team also informed you that given the company's recent digitization, some information may be missing from the database sent to you.
+●	Sobre Kaggle: Se você não conhece o Kaggle, esse pode ser um bom lugar para se familiarizar com as competições 
+(https://www.kaggle.com/docs/competitions), e se tiver interesse, aproveite os códigos públicos para se inspirar.
 
-Finally, the technical team informed you that the source of information comes from the company's maintenance sector, where they created a column in the database called class: "pos" would be those trucks that had defects in the air system and "neg" would be those trucks that had a defect in any system other than the air system. 
+●	Feature Engineering: Conheça os dados e considere criar novas features a partir dos dados brutos que possam ajudar o modelo a fazer previsões mais precisas.
 
-Those responsible for the project are very excited about the initiative and, when asking for a technical proof of concept, they have put forth as main requirements:
--	Can we reduce our expenses with this type of maintenance using AI techniques?
--	Can you present to me the main factors that point to a possible failure in this system?
-These points, according to them, are important to convince the executive board to embrace the cause and apply it to other maintenance systems during the year 2022.
- 
-## About the database 
-Two files will be sent to you: 
--	air_system_previous_years.csv: File containing all information from the maintenance sector for years prior to 2022 with 178 columns.
--	air_system_present_year.csv: File containing all information from the maintenance sector in this year.
--	Any missing value in the database is denoted by na.
+●	Modelagem: Fique a vontade para considerar diferentes algoritmos e técnicas.
 
-The final results that will be presented to the executive board need to be evaluated against air_system_present_year.csv.
+●	Material externo: Sinta se à vontade para utilizar e aproveitar de materiais e ferramentas externas como ChatGPT, Copilot e afins.
 
-## Challenge Activities
-To solve this problem we want you to answer the following questions:
+## Considerações Finais
+Durante a entrevista, pediremos que você apresente a sua solução para o problema. Ao final da nossa conversa, pediremos que você submeta o material que tiver construído para a Blip, por email.
 
-1.	What steps would you take to solve this problem? Please describe as completely and clearly as possible all the steps that you see as essential for solving the problem.
-2.	Which technical data science metric would you use to solve this challenge? Ex: absolute error, rmse, etc. 
-3.	Which business metric  would you use to solve the challenge?
-4.	How do technical metrics relate to the business metrics?
-5.	What types of analyzes would you like to perform on the customer database?
-6.	What techniques would you use to reduce the dimensionality of the problem? 
-7.	What techniques would you use to select variables for your predictive model?
-8.	What predictive models would you use or test for this problem? Please indicate at least 3.
-9.	How would you rate which of the trained models is the best?
-10.	How would you explain the result of your model? Is it possible to know which variables are most important?
-11.	How would you assess the financial impact of the proposed model?
-12.	What techniques would you use to perform the hyperparameter optimization of the chosen model?
-13.	What risks or precautions would you present to the customer before putting this model into production?
-14.	If your predictive model is approved, how would you put it into production?
-15.	If the model is in production, how would you monitor it?
-16.	If the model is in production, how would you know when to retrain it?
+1.	Uma breve apresentação no seu formato favorito (Slides, Diagrama, etc) apresentando um desenho de uma possível solução.
+a.	Não precisa ser algo formal, mas queremos entender sua linha de raciocínio.
+
+3.	[Opcional] - O link com o código completo submetido publicamente de forma similar ao exemplo https://www.kaggle.com/code/awsaf49/lmsys-kerasnlp-starter .
+a.	Atenção! Compartilhamento de códigos de competições ativas no Kaggle devem ser públicas
+Este desafio não é apenas uma oportunidade de mostrar suas habilidades técnicas, mas também sua capacidade de comunicar resultados complexos de forma clara e eficiente. Boa sorte!
+Se tiver dúvidas durante o desafio, não hesite em entrar em contato. Estamos ansiosos para ver sua abordagem e solução para este problema!
 
