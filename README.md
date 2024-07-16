@@ -1,3 +1,3 @@
-# Data Science Projects
+## Parceiros Vivo
 
-Repositories of some of the Data Science projects I've worked on
+Modelo de aprendizado não supervisionado para criação de KPIs das lojas parceiras da Vivo Telefônica.
