@@ -1,45 +1,25 @@
-# Introdução ao Desafio
+# Desafio
 
-Este desafio técnico é projetado para avaliar suas habilidades em planejamento de solução de problemas, análise de dados, modelagem preditiva e interpretação de resultados. 
-Considere o desafio da competição "LMSys Chatbot Arena" no Kaggle (acessivel em https://www.kaggle.com/competitions/lmsys-chatbot-arena/overview ), que contém prompts e respostas geradas por dois modelos distintos. A proposta desse desafio do Kaggle é criar uma solução que possa inferir qual dos dois modelos gerou a resposta de melhor qualidade, considerando que o empate é uma opção válida.
-Seu objetivo será propor e defender uma solução viável de ser implementada para solucionar o desafio. Não será obrigatório a implementação da mesma, mas lembre-se que você deverá explicar seu funcionamento e ter justificativas para cada decisão técnica. Durante a entrevista, iremos conversar sobre a solução proposta.
+Desenvolva um algoritmo com base em aprendizado de máquina e análise preditiva que preveja disparos verdadeiros (considerando o cenário abaixo).
 
-## Detalhes
-●	Base de Dados: Ao se inscrever no desafio, o Kaggle irá liberar acesso a um conjunto de dados de treino e de teste com prompts e as respostas de dois modelos diferentes para cada prompt.
+## Empresa de monitoramento (cliente Segware)
 
-●	Tarefa do desafio: Propor, documentar e defender uma solução que possa determinar qual resposta é melhor, ou se há um empate, com base em critérios definidos por você. A forma de documentação e apresentação é livre, e a defesa ocorrerá durante a entrevista.
+toda a empresa que utiliza a plataforma desenvolvida pela Segware para tratar sinais (eventos) decorrentes de sistemas de alarmes eletrônicos (com sensores de movimento, por exemplo), câmeras e etc.
 
-●	Critérios de Avaliação:
+Um dos maiores causadores de custos para as empresas de monitoramento são os deslocamentos, ou seja, quando a empresa precisa enviar uma viatura (carro ou moto) até a residência ou comércio que está sendo monitorado.
 
-  1.	Justificativa da escolha do modelo e das técnicas utilizadas.
-  
-  2.	Clareza e eficácia da explicação dos resultados e do processo.
-  
-  3.	Complexidade da solução.
-  
-  4.	Discussão de prós e contras da solução e alternativas.
-  
+Acontece que muitas vezes esses disparos são causados por cenários diversos, como: um galho de arvore balançando ao vento, tempestades, animais, ou mesmo pelo próprio cliente querendo fazer um teste para ver se a empresa de monitoramento está mesmo de olho.
 
-## Dicas
-●	Geral: Você não terá muito tempo para ficar pensando nas coisas, então saiba priorizar.
+Baseando-se nos arquivos train.cvs e test.cvs, desenvolva um algoritmo que preveja se o disparo é falso ou verdadeiro, indicando a precisão do resultado.
 
-●	Sobre Kaggle: Se você não conhece o Kaggle, esse pode ser um bom lugar para se familiarizar com as competições 
-(https://www.kaggle.com/docs/competitions), e se tiver interesse, aproveite os códigos públicos para se inspirar.
+É imprescindível que sejam comentados todos os trechos relevantes do algoritmo, explicando cada função, e decisão realizada durante o processo de desenvolvimento.
 
-●	Feature Engineering: Conheça os dados e considere criar novas features a partir dos dados brutos que possam ajudar o modelo a fazer previsões mais precisas.
-
-●	Modelagem: Fique a vontade para considerar diferentes algoritmos e técnicas.
-
-●	Material externo: Sinta se à vontade para utilizar e aproveitar de materiais e ferramentas externas como ChatGPT, Copilot e afins.
-
-## Considerações Finais
-Durante a entrevista, pediremos que você apresente a sua solução para o problema. Ao final da nossa conversa, pediremos que você submeta o material que tiver construído para a Blip, por email.
-
-1.	Uma breve apresentação no seu formato favorito (Slides, Diagrama, etc) apresentando um desenho de uma possível solução.
-a.	Não precisa ser algo formal, mas queremos entender sua linha de raciocínio.
-
-3.	[Opcional] - O link com o código completo submetido publicamente de forma similar ao exemplo https://www.kaggle.com/code/awsaf49/lmsys-kerasnlp-starter .
-a.	Atenção! Compartilhamento de códigos de competições ativas no Kaggle devem ser públicas
-Este desafio não é apenas uma oportunidade de mostrar suas habilidades técnicas, mas também sua capacidade de comunicar resultados complexos de forma clara e eficiente. Boa sorte!
-Se tiver dúvidas durante o desafio, não hesite em entrar em contato. Estamos ansiosos para ver sua abordagem e solução para este problema!
-
+### 	Dicionário de dados:
+o	Código do cliente: Código único do cliente dentro do sistema;
+o	Nível de risco: grau de periculosidade do local, sendo 5 o mais alto;
+o	Possui servidor CFTV: indica se o cliente possui monitoramento de imagens (0: não; 1:sim);
+o	Pessoa física, jurídica ou orgão público: 0 = jurídica, 1 = física, 2 = órgão público;
+o	Estado, Cidade, Bairro: Localidade do cliente;
+o	Data/hora: data/hora da ocorrência do evento;
+o	Código do evento: código do evento enviado;
+o	Confirmado: indica se houve de fato um sinistro no cliente (0: não, 1: sim). 
