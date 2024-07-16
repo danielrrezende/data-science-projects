@@ -1,3 +1,3 @@
-## Troca de Aparelhos
+# data-science-projects
 
-Controle preditivo inteligente capaz de prever se um cliente tem propensão de troca de aparelho e caso este cliente tenha propensão, qual mês se daria esta troca.
+Repositories of some of the Data Science projects I've worked on
