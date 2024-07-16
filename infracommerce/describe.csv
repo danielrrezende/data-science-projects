@@ -1,0 +1,11 @@
+step ;mapeia uma unidade de tempo no mundo real. Neste caso, 1 passo equivale a 1 hora. Total de passos 744 (simulação de 30 dias).
+type ;  CASH-IN, CASH-OUT, DÉBITO, PAGAMENTO e TRANSFERÊNCIA.
+amount ;valor da transação em moeda local.
+nameOrig ;  cliente que iniciou a transação
+oldbalanceOrg ;  saldo inicial antes da transação
+newbalanceOrig ;  novo saldo após a transação.
+nameDest ;  cliente que é o destinatário da transação
+oldbalanceDest ;  destinatário do saldo inicial antes da transação. Observe que não há informações para clientes que iniciam com M (Comerciantes).
+newbalanceDest ;  novo destinatário do saldo após a transação. Observe que não há informações para clientes que iniciam com M (Comerciantes).
+isFraud ;  São as transações realizadas pelos agentes fraudulentos dentro da simulação. Neste conjunto de dados específico, o comportamento fraudulento dos agentes visa lucrar assumindo o controle das contas dos clientes e tentando esvaziar os fundos transferindo para outra conta e depois sacando do sistema.
+isFlaggedFraud ;  O modelo de negócio visa controlar transferências massivas de uma conta para outra e sinalizar tentativas ilegais. Uma tentativa ilegal neste conjunto de dados é uma tentativa de transferir mais de 200.000 em uma única transação.
