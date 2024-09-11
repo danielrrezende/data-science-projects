@@ -31,15 +31,3 @@ Seu objetivo será propor e defender uma solução viável de ser implementada p
 ●	Modelagem: Fique a vontade para considerar diferentes algoritmos e técnicas.
 
 ●	Material externo: Sinta se à vontade para utilizar e aproveitar de materiais e ferramentas externas como ChatGPT, Copilot e afins.
-
-## Considerações Finais
-Durante a entrevista, pediremos que você apresente a sua solução para o problema. Ao final da nossa conversa, pediremos que você submeta o material que tiver construído para a Blip, por email.
-
-1.	Uma breve apresentação no seu formato favorito (Slides, Diagrama, etc) apresentando um desenho de uma possível solução.
-a.	Não precisa ser algo formal, mas queremos entender sua linha de raciocínio.
-
-3.	[Opcional] - O link com o código completo submetido publicamente de forma similar ao exemplo https://www.kaggle.com/code/awsaf49/lmsys-kerasnlp-starter .
-a.	Atenção! Compartilhamento de códigos de competições ativas no Kaggle devem ser públicas
-Este desafio não é apenas uma oportunidade de mostrar suas habilidades técnicas, mas também sua capacidade de comunicar resultados complexos de forma clara e eficiente. Boa sorte!
-Se tiver dúvidas durante o desafio, não hesite em entrar em contato. Estamos ansiosos para ver sua abordagem e solução para este problema!
-
