@@ -1,11 +1,6 @@
 # Consultor de Dados Pleno
 
-Bem-vindo ao desafio ICTS! O Consultor Pleno em Ciência de Dados em nosso time tem
-um papel muito importante: ele deve desenvolver modelos de machine learning que
-apresentem bom desempenho, que sejam confiáveis, escaláveis e de fácil manutenção
-em produção.
-
-Neste desafio, queremos explorar sua capacidade de desenvolver uma solução de
+Neste desafio, queremos explorar a capacidade de desenvolver uma solução de
 machine learning, desde o ETL, EDA e feature selection até a construção de um pipeline
 completo para classificação de registros em produção.
 Apresentamos a seguir um problema para que você possa avaliá-lo e sugerir uma
