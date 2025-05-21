@@ -1,7 +1,6 @@
 # Sumario
 
-Gostaríamos de realizar um teste que será usado para sabermos a sua proficiência nas
-habilidades para a vaga. O teste consiste na análise de um conjunto de dados e seus
+O projeto consiste na análise de um conjunto de dados e seus
 resultados deverão ser armazenados no GitHub . O link do seu repositório deverá ser
 compartilhado conosco ao final do teste.
 Quando usar alguma referência ou biblioteca externa, informe no arquivo README do
