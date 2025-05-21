@@ -18,5 +18,3 @@
 
 	O desafio que se segue tem a intenção de avaliar as habilidades essenciais ao cientista de dados, fornecendo um cenário hipotético para que o candidato possa mostrar seus conhecimentos e habilidades propondo uma abordagem capaz de solucionar os problemas propostos. Antes de iniciar o desafio faça o download dos arquivos que serão utilizados em cada uma das partes.
 
-
-obs: Todas as atividades aqui descritas devem ser realizadas através de um notebook do Google Collaboratory.
