@@ -251,7 +251,6 @@ nova_pergunda_usuario = 'Como posso criar uma conta?'
 
 ## 📚 Acknowledgments & References
 
-* Case study and project structured by [Data Science Academy](https://www.google.com/search?q=https://www.datascienceacademy.com.br).
 * Base model provided by [TII UAE](https://www.google.com/search?q=https://huggingface.co/tiiuae/falcon-7b).
 
 ```
