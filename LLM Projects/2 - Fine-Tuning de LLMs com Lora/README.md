@@ -113,5 +113,4 @@ prompt = "It's rare that a movie lives up to its hype, even rarer that the hype 
 ---
 
 ## 📚 Acknowledgments & References
-- Case study and project structured by [Data Science Academy](https://www.datascienceacademy.com.br).
 - Pretrained base model hosted by [NousResearch / Hugging Face](https://huggingface.co/NousResearch/Llama-2-7b-chat-hf).
