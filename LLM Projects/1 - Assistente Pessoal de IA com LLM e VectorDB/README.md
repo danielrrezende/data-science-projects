@@ -132,7 +132,6 @@ print(response)
 
 ## 📚 Acknowledgments & References
 
-* Project developed as part of coursework at [Data Science Academy](https://www.datascienceacademy.com.br).
 * Vector store powered by [ChromaDB](https://www.trychroma.com/).
 * Orchestration powered by [LangChain](https://python.langchain.com/).
 """
@@ -292,9 +291,6 @@ print(response)
 ---
 
 ## 📚 Acknowledgments & References
-
-* Project developed as part of coursework at [Data Science Academy](https://www.datascienceacademy.com.br).
-
 
 * Vector store powered by [ChromaDB](https://www.trychroma.com/).
 
