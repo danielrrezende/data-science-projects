@@ -113,5 +113,4 @@ reinforcement learning.
 ---
 
 ## 📚 Acknowledgments & References
-- Course / Case Study originally inspired by [Data Science Academy](https://www.datascienceacademy.com.br).
 - Pretrained weights hosted on [Hugging Face Models (gpt2-large)](https://huggingface.co/gpt2-large).
