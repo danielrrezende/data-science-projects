@@ -1,0 +1,9 @@
+chromadb==0.5.0
+pypdf==4.2.0
+openai==1.33.0
+langchain==0.2.3
+langchain-community
+pandas==2.2.2
+numpy==1.26.4
+python-dotenv
+tiktoken==0.7.0
