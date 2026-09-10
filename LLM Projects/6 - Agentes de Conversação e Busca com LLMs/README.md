@@ -85,7 +85,6 @@ Open the application in your browser and enter your **OpenAI API Key** in the si
 
 ## 📚 Acknowledgments & References
 
-* Project developed as part of coursework at [Data Science Academy](https://www.datascienceacademy.com.br).
 * Agent framework powered by [LangChain](https://python.langchain.com/).
 * UI powered by [Streamlit](https://streamlit.io/).
 """
