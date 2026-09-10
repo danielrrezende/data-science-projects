@@ -1,5 +1,4 @@
-```python
-readme_content = """# Talk to Your PDFs: Personal AI Assistant with LangChain & ChromaDB
+# Talk to Your PDFs: Personal AI Assistant with LangChain & ChromaDB
 
 A Retrieval-Augmented Generation (RAG) system built in Python to chat with PDF documents using OpenAI embeddings, Chroma vector store, and LangChain QA chains.
 
