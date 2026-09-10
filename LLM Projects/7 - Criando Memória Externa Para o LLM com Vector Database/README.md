@@ -127,7 +127,6 @@ print(answer)
 
 ## 📚 Acknowledgments & References
 
-* Project developed as part of coursework at [Data Science Academy](https://www.datascienceacademy.com.br).
 * Document ingestion powered by [Unstructured.io](https://unstructured.io/).
 * Embeddings powered by [BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3).
 * Base LLM provided by [Meta via Hugging Face (`meta-llama/Meta-Llama-3-8B-Instruct`)](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct).
@@ -291,9 +290,6 @@ print(answer)
 ---
 
 ## 📚 Acknowledgments & References
-
-* Project developed as part of coursework at [Data Science Academy](https://www.datascienceacademy.com.br).
-
 
 * Document ingestion powered by [Unstructured.io](https://unstructured.io/).
 
