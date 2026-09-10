@@ -131,6 +131,5 @@ However, the question asks about the exception, which is not included in the Alm
 ---
 
 ## 📚 Acknowledgments & References
-- Project developed as part of coursework at [Data Science Academy](https://www.datascienceacademy.com.br).
 - Pretrained model hosted by [NousResearch / Hugging Face](https://huggingface.co/NousResearch/Llama-2-7b-chat-hf).
 - Dataset curated by [nlpie on Hugging Face](https://huggingface.co/datasets/nlpie/Llama2-MedTuned-Instructions).
