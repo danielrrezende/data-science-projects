@@ -35,7 +35,7 @@ Crie um ambiente virtual (recomendado) e instale o pacote de dependências[cite:
 
 ```bash
 python -m venv dsaenv
-source dsaenv/bin/activate  # No Windows use: dsaenv\Scripts\activate
+source dsaenv/bin/activate  # No Windows use: dsenv\Scripts\activate
 pip install -r requirements.txt
 
 ```
