@@ -122,9 +122,7 @@ prompt = "It's rare that a movie lives up to its hype, even rarer that the hype 
 
 * Modelo base pré-treinado hospedado por [NousResearch / Hugging Face](https://huggingface.co/NousResearch/Llama-2-7b-chat-hf).
 
-```
 
-```
 
 <br>
 <br>
