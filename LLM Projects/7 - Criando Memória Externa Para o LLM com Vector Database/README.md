@@ -8,7 +8,7 @@ Um sistema de Geração Aumentada por Recuperação (RAG) implementando memória
 
 Este projeto constrói uma arquitetura de perguntas e respostas de ponta a ponta utilizando arquivos PDF locais como conhecimento externo:
 
-* **Particionamento e Ingestão de Documentos:** Conecta-se à API `unstructured-client` para extrair e particionar texto de documentos PDF brutos (`ArtigoDSA1.pdf`) em chunks por título (`by_title`, máximo de 512 caracteres).
+* **Particionamento e Ingestão de Documentos:** Conecta-se à API `unstructured-client` para extrair e particionar texto de documentos PDF brutos (`Artigods1.pdf`) em chunks por título (`by_title`, máximo de 512 caracteres).
 * **Embeddings Multilíngues Densos:** Vetoriza elementos de documentos em vetores semânticos usando o modelo multilíngue de alto desempenho `BAAI/bge-m3`.
 * **Indexação em Armazenamento Vetorial:** Indexa representações de chunks usando um armazenamento vetorial **FAISS** acelerado por GPU e configura um recuperador de similaridade top-$k$ ($k=4$).
 * **Inferência com LLaMA 3 Quantizado:** Carrega `meta-llama/Meta-Llama-3-8B-Instruct` em precisão de 4 bits (`BitsAndBytesConfig`, `nf4`, `bfloat16`) com finalizadores de token personalizados (`<|eot_id|>`).
@@ -60,14 +60,14 @@ HfFolder.save_token("your_huggingface_token")
 ```
 
 3. **Prepare os Documentos de Conhecimento:**
-Coloque os arquivos PDF alvo no diretório `arquivos/` (ex.: `arquivos/ArtigoDSA1.pdf`).
+Coloque os arquivos PDF alvo no diretório `arquivos/` (ex.: `arquivos/Artigods1.pdf`).
 
 ---
 
 ## ⚙️ Arquitetura e Fluxo do Pipeline
 
 ```
-[ Documento PDF: arquivos/ArtigoDSA1.pdf ]
+[ Documento PDF: arquivos/Artigods1.pdf ]
                      │
                      ▼
 [ Particionamento via API Unstructured (by_title, 512 caracteres) ]
@@ -158,7 +158,7 @@ A Retrieval-Augmented Generation (RAG) system implementing external long-term ve
 ## 📌 Project Overview
 
 This project builds an end-to-end question-answering architecture using local PDF files as external knowledge:
-- **Document Partitioning & Ingestion:** Connects to the `unstructured-client` API to extract and partition text from raw PDF documents (`ArtigoDSA1.pdf`) into chunks by title (`by_title`, max 512 characters).
+- **Document Partitioning & Ingestion:** Connects to the `unstructured-client` API to extract and partition text from raw PDF documents (`Artigods1.pdf`) into chunks by title (`by_title`, max 512 characters).
 - **Dense Multilingual Embeddings:** Vectorizes document elements into semantic vectors using the high-performing multilingual model `BAAI/bge-m3`.
 - **Vector Store Indexing:** Indexes chunk representations using a GPU-accelerated **FAISS** vector store and configures a top-$k$ similarity retriever ($k=4$).
 - **Quantized LLaMA 3 Inference:** Loads `meta-llama/Meta-Llama-3-8B-Instruct` in 4-bit precision (`BitsAndBytesConfig`, `nf4`, `bfloat16`) with custom token terminators (`<|eot_id|>`).
@@ -208,14 +208,14 @@ HfFolder.save_token("your_huggingface_token")
 
 
 3. **Prepare Knowledge Documents:**
-Place target PDF files in the `arquivos/` directory (e.g., `arquivos/ArtigoDSA1.pdf`).
+Place target PDF files in the `arquivos/` directory (e.g., `arquivos/Artigods1.pdf`).
 
 ---
 
 ## ⚙️ Architecture & Pipeline Flow
 
 ```
-[ PDF Document: arquivos/ArtigoDSA1.pdf ]
+[ PDF Document: arquivos/Artigods1.pdf ]
                      │
                      ▼
 [ Unstructured API Partitioning (by_title, 512 chars) ]
