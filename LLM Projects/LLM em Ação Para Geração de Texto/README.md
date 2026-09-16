@@ -112,8 +112,17 @@ de aprendizado por reforço.
 - Pesos pré-treinados hospedados no [Hugging Face Models (gpt2-large)](https://huggingface.co/gpt2-large).
 
 
-============================================================================================
 
+<br>
+<br>
+
+---
+
+<br>
+<br>
+
+## English
+<br>
 
 # Text Generation with GPT-2 Large in Python
 
