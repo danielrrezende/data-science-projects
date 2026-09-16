@@ -32,7 +32,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Configuração do título da página
-st.set_page_config(page_title = "DSA")
+st.set_page_config(page_title = "ds")
 
 # Criação de colunas para layout da página
 # Define a proporção das colunas
@@ -102,7 +102,7 @@ if prompt := st.chat_input(placeholder = "Digite uma pergunta para começar!"):
 
     # Configuração do modelo de linguagem da OpenAI
     # https://python.langchain.com/docs/integrations/chat/openai/
-    llm_dsa = ChatOpenAI(openai_api_key = openai_api_key, streaming = True)
+    llm_ds = ChatOpenAI(openai_api_key = openai_api_key, streaming = True)
     
     # Configuração da ferramenta de busca do agente
     # https://api.python.langchain.com/en/latest/tools/langchain_community.tools.ddg_search.tool.DuckDuckGoSearchRun.html
@@ -110,11 +110,11 @@ if prompt := st.chat_input(placeholder = "Digite uma pergunta para começar!"):
     
     # Criação do agente conversacional com a ferramenta de busca
     # https://api.python.langchain.com/en/latest/agents/langchain.agents.conversational_chat.base.ConversationalChatAgent.html
-    chat_dsa_agent = ConversationalChatAgent.from_llm_and_tools(llm = llm_dsa, tools = mecanismo_busca)
+    chat_ds_agent = ConversationalChatAgent.from_llm_and_tools(llm = llm_ds, tools = mecanismo_busca)
     
     # Executor para o agente, incluindo memória e tratamento de erros
     # https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html
-    executor = AgentExecutor.from_agent_and_tools(agent = chat_dsa_agent,
+    executor = AgentExecutor.from_agent_and_tools(agent = chat_ds_agent,
                                                   tools = mecanismo_busca,
                                                   memory = memory,
                                                   return_intermediate_steps = True,
