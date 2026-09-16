@@ -1,3 +1,152 @@
+# Converse com seus PDFs: Assistente de IA Pessoal com LangChain & ChromaDB
+
+Um sistema de Geração Aumentada por Recuperação (RAG) construído em Python para conversar com documentos PDF usando embeddings da OpenAI, banco de dados vetorial Chroma e cadeias de QA do LangChain.
+
+---
+
+## 📌 Visão Geral do Projeto
+
+Este projeto implementa um assistente de IA de perguntas e respostas sobre documentos PDF locais usando uma arquitetura RAG:
+- Carrega arquivos PDF de um diretório usando `PyPDFDirectoryLoader`.
+- Calcula representações vetoriais do conteúdo dos documentos usando `OpenAIEmbeddings`.
+- Indexa os embeddings dos documentos em um armazenamento vetorial em memória usando o `Chroma`.
+- Realiza busca por similaridade (k-NN) para buscar as principais passagens relevantes ($k$ passagens).
+- Responde a consultas de usuários contextualmente usando um LLM da OpenAI por meio da `load_qa_chain` do LangChain (tipo de cadeia "stuff").
+
+---
+
+## 🛠️ Pilha Tecnológica e Requisitos
+
+- **Linguagem:** Python 3.10+ (testado no Python 3.11.5)
+- **Frameworks e Bibliotecas:**
+  - `langchain` & `langchain-community`
+  - `chromadb`
+  - `openai`
+  - `pypdf` (para extração de texto de PDF via `PyPDFDirectoryLoader`)
+  - `python-dotenv` (para gerenciamento de chave de API)
+  - `watermark` (para controle de versão)
+
+---
+
+## 🚀 Instalação e Configuração
+
+1. **Clone o repositório e instale as dependências:**
+
+    ```bash
+    pip install -r requirements.txt
+    pip install watermark python-dotenv
+    ```
+
+2. **Configure a Chave da API da OpenAI:**
+Crie um arquivo `.env` no diretório raiz:
+```env
+OPENAI_API_KEY=sua_chave_da_api_openai_aqui
+
+```
+
+3. **Adicione Documentos PDF:**
+Crie um diretório chamado `arquivos/` (ou o caminho de pasta de sua preferência) e coloque seus documentos `.pdf` dentro dele.
+
+---
+
+## 📂 Arquitetura e Fluxo de Trabalho
+
+```
+[ Arquivos PDF em 'arquivos/' ]
+           │
+           ▼
+[ PyPDFDirectoryLoader ] ──► Extrai Texto e Metadados
+           │
+           ▼
+[ OpenAIEmbeddings ] ──► Converte Texto em Embeddings Vetoriais Densos
+           │
+           ▼
+[ Chroma Vector Store ] ──► Armazena e Indexa Vetores ('dsa-index')
+           │
+           ├──► Busca por Similaridade (k=2)
+           ▼
+[ LangChain QA 'Stuff' Chain ] ◄── OpenAI LLM (temperature=0.3)
+           │
+           ▼
+[ Geração de Resposta Fundamentada ]
+
+```
+
+---
+
+## 💻 Exemplo de Código / Uso
+
+```python
+import os
+from dotenv import load_dotenv
+from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_community.llms import OpenAI
+from langchain.chains.question_answering import load_qa_chain
+
+# 1. Carregar Variáveis de Ambiente
+load_dotenv()
+
+# 2. Extrair Texto dos PDFs
+loader = PyPDFDirectoryLoader("arquivos/")
+documents = loader.load()
+
+# 3. Criar Embeddings e Inicializar o ChromaDB
+embeddings = OpenAIEmbeddings(api_key=os.environ["OPENAI_API_KEY"])
+vector_store = Chroma.from_documents(
+    documents,
+    embeddings,
+    collection_name="dsa-index"
+)
+
+# 4. Configurar a Cadeia de QA
+llm = OpenAI(openai_api_key=os.environ["OPENAI_API_KEY"], temperature=0.3)
+chain = load_qa_chain(llm, chain_type="stuff")
+
+# 5. Função de Consulta
+def ask_pdf(query: str, k: int = 2) -> str:
+    relevant_docs = vector_store.similarity_search(query, k=k)
+    return chain.run(input_documents=relevant_docs, question=query)
+
+# Exemplo de Execução
+response = ask_pdf("O que a pesquisa recente da Salesforce descobriu?")
+print(response)
+
+```
+
+---
+
+## 💬 Consultas de Exemplo e Resultados
+
+* **Consulta 1:** *"O que a pesquisa recente da Salesforce descobriu?"*
+**Resposta:** A pesquisa recente da Salesforce descobriu que três quartos dos trabalhadores do mundo se sentem despreparados para os empregos que podem encontrar após o marco em que o número de horas trabalhadas pelas máquinas será igual ao número de horas trabalhadas pelos humanos.
+* **Consulta 2:** *"Qual percentual de empregadores estão tendo problemas para preencher vagas digitais com candidatos qualificados?"*
+**Resposta:** Quase 60% dos empregadores estão tendo problemas para preencher vagas digitais com candidatos qualificados.
+* **Consulta 3:** *"Qual a habilidade mais importante na era da Inteligência Artificial?"*
+**Resposta:** "Seja Bom em Aprender".
+
+---
+
+## 📚 Agradecimentos e Referências
+
+* Banco de dados vetorial impulsionado por [ChromaDB](https://www.trychroma.com/).
+* Orquestração impulsionada por [LangChain](https://python.langchain.com/).
+
+
+
+<br>
+<br>
+
+---
+
+<br>
+<br>
+
+## English
+<br>
+
+
 # Talk to Your PDFs: Personal AI Assistant with LangChain & ChromaDB
 
 A Retrieval-Augmented Generation (RAG) system built in Python to chat with PDF documents using OpenAI embeddings, Chroma vector store, and LangChain QA chains.
