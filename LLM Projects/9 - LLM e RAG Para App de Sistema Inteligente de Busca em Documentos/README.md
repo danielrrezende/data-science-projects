@@ -7,23 +7,23 @@ Um sistema completo de Retrieval-Augmented Generation (RAG) construído de ponta
 ## 📌 Visão Geral do Projeto
 
 Esta aplicação oferece uma arquitetura robusta de Busca de Informação Corporativa (Enterprise Q&A):
-- **Ingestão Multi-formato (`ds_rag.py`):** Processamento recursivo em diretórios lendo formatos como `.pdf`, `.docx`, `.pptx` e `.txt`[cite: 31].
-- **Fatiamento e Incorporações Densas (Embeddings):** Os documentos são fatiados em pedaços de 500 tokens com 50 tokens de sobreposição (`TokenTextSplitter`) e mapeados vetorialmente usando o modelo otimizado `sentence-transformers/msmarco-bert-base-dot-v5`[cite: 29, 31].
-- **Banco de Dados Vetorial Qdrant:** Utiliza contêiner Docker do [Qdrant](https://qdrant.tech/) para criar índices de alta performance (`DSAVectorDB`), combinando vetores e metadados de localização de arquivos (source paths)[cite: 29, 31].
-- **Backend FastAPI (`dsa_api_2.py` / `ds_start_api.py`):** Recebe consultas via rota POST, recupera os 10 chunks mais similares, constrói um contexto consolidado e solicita resposta à LLM `meta/llama3-70b-instruct` através da API da NVIDIA, exigindo estritamente o uso de citações em colchetes (ex: `[0]`)[cite: 29, 32].
-- **Frontend Streamlit Web App (`ds_web_app.py`):** Um portal de conversação moderno. Lê e trata o retorno JSON da API, utiliza expressões regulares (Regex) para destacar identificadores dos documentos, apresenta o parágrafo original de contexto através de *expanders* na UI, e habilita botões para download dos anexos referenciados[cite: 28].
+- **Ingestão Multi-formato (`ds_rag.py`):** Processamento recursivo em diretórios lendo formatos como `.pdf`, `.docx`, `.pptx` e `.txt`.
+- **Fatiamento e Incorporações Densas (Embeddings):** Os documentos são fatiados em pedaços de 500 tokens com 50 tokens de sobreposição (`TokenTextSplitter`) e mapeados vetorialmente usando o modelo otimizado `sentence-transformers/msmarco-bert-base-dot-v5`.
+- **Banco de Dados Vetorial Qdrant:** Utiliza contêiner Docker do [Qdrant](https://qdrant.tech/) para criar índices de alta performance (`DSAVectorDB`), combinando vetores e metadados de localização de arquivos (source paths).
+- **Backend FastAPI (`dsa_api_2.py` / `ds_start_api.py`):** Recebe consultas via rota POST, recupera os 10 chunks mais similares, constrói um contexto consolidado e solicita resposta à LLM `meta/llama3-70b-instruct` através da API da NVIDIA, exigindo estritamente o uso de citações em colchetes (ex: `[0]`).
+- **Frontend Streamlit Web App (`ds_web_app.py`):** Um portal de conversação moderno. Lê e trata o retorno JSON da API, utiliza expressões regulares (Regex) para destacar identificadores dos documentos, apresenta o parágrafo original de contexto através de *expanders* na UI, e habilita botões para download dos anexos referenciados.
 
 ---
 
 ## 🛠️ Stack Tecnológico e Requisitos
 
 - **Linguagem:** Python 3.10+
-- **Banco Vetorial:** `qdrant-client` & Imagem Docker do Qdrant[cite: 23, 29]
-- **Web App / UI:** `streamlit`[cite: 23, 28]
-- **API Backend:** `fastapi`, `uvicorn`, `pydantic`[cite: 23, 29, 32]
-- **RAG & LangChain:** `langchain`, `langchain_qdrant`, `langchain_huggingface`[cite: 23, 29, 31]
-- **Processamento de Documentos:** `PyPDF2`, `python-docx`, `python-pptx`[cite: 23, 31]
-- **LLM Provider:** API da NVIDIA (Llama 3 70B)[cite: 29]
+- **Banco Vetorial:** `qdrant-client` & Imagem Docker do Qdrant
+- **Web App / UI:** `streamlit`
+- **API Backend:** `fastapi`, `uvicorn`, `pydantic`
+- **RAG & LangChain:** `langchain`, `langchain_qdrant`, `langchain_huggingface`
+- **Processamento de Documentos:** `PyPDF2`, `python-docx`, `python-pptx`
+- **LLM Provider:** API da NVIDIA (Llama 3 70B)
 
 ---
 
@@ -31,7 +31,7 @@ Esta aplicação oferece uma arquitetura robusta de Busca de Informação Corpor
 
 ### 1. Preparação do Ambiente e Dependências
 
-Crie um ambiente virtual (recomendado) e instale o pacote de dependências[cite: 22].
+Crie um ambiente virtual (recomendado) e instale o pacote de dependências.
 
 ```bash
 python -m venv dsaenv
@@ -138,23 +138,23 @@ A complete end-to-end Retrieval-Augmented Generation (RAG) system. This project 
 ## 📌 Project Overview
 
 This application provides a robust Enterprise Q&A Architecture:
-- **Multi-Format Ingestion (`ds_rag.py`):** Recursively processes directories reading `.pdf`, `.docx`, `.pptx`, and `.txt` formats[cite: 31].
-- **Chunking & Dense Embeddings:** Documents are split into 500-token chunks with a 50-token overlap (`TokenTextSplitter`) and vectorized using the highly optimized `sentence-transformers/msmarco-bert-base-dot-v5` model[cite: 29, 31].
-- **Qdrant Vector Database:** Uses a [Qdrant](https://qdrant.tech/) Docker container to create high-performance indexes (`DSAVectorDB`), combining vectors and file path metadata[cite: 29, 31].
-- **FastAPI Backend (`dsa_api_2.py` / `ds_start_api.py`):** Receives queries via a POST route, retrieves the top 10 most similar chunks, builds a consolidated context, and prompts the `meta/llama3-70b-instruct` LLM via the NVIDIA API, strictly demanding bracketed citations (e.g., `[0]`)[cite: 29, 32].
-- **Streamlit Web App Frontend (`ds_web_app.py`):** A modern conversational portal. It reads and parses the JSON response from the API, uses Regular Expressions (Regex) to highlight document identifiers, presents the original context paragraphs through expanders in the UI, and enables direct download buttons for the referenced attachments[cite: 28].
+- **Multi-Format Ingestion (`ds_rag.py`):** Recursively processes directories reading `.pdf`, `.docx`, `.pptx`, and `.txt` formats.
+- **Chunking & Dense Embeddings:** Documents are split into 500-token chunks with a 50-token overlap (`TokenTextSplitter`) and vectorized using the highly optimized `sentence-transformers/msmarco-bert-base-dot-v5` model.
+- **Qdrant Vector Database:** Uses a [Qdrant](https://qdrant.tech/) Docker container to create high-performance indexes (`DSAVectorDB`), combining vectors and file path metadata.
+- **FastAPI Backend (`dsa_api_2.py` / `ds_start_api.py`):** Receives queries via a POST route, retrieves the top 10 most similar chunks, builds a consolidated context, and prompts the `meta/llama3-70b-instruct` LLM via the NVIDIA API, strictly demanding bracketed citations (e.g., `[0]`).
+- **Streamlit Web App Frontend (`ds_web_app.py`):** A modern conversational portal. It reads and parses the JSON response from the API, uses Regular Expressions (Regex) to highlight document identifiers, presents the original context paragraphs through expanders in the UI, and enables direct download buttons for the referenced attachments.
 
 ---
 
 ## 🛠️ Tech Stack & Requirements
 
 - **Language:** Python 3.10+
-- **Vector Database:** `qdrant-client` & Qdrant Docker Image[cite: 23, 29]
-- **Web App / UI:** `streamlit`[cite: 23, 28]
-- **Backend API:** `fastapi`, `uvicorn`, `pydantic`[cite: 23, 29, 32]
-- **RAG & LangChain:** `langchain`, `langchain_qdrant`, `langchain_huggingface`[cite: 23, 29, 31]
-- **Document Processing:** `PyPDF2`, `python-docx`, `python-pptx`[cite: 23, 31]
-- **LLM Provider:** NVIDIA API Catalog (Llama 3 70B)[cite: 29]
+- **Vector Database:** `qdrant-client` & Qdrant Docker Image
+- **Web App / UI:** `streamlit`
+- **Backend API:** `fastapi`, `uvicorn`, `pydantic`
+- **RAG & LangChain:** `langchain`, `langchain_qdrant`, `langchain_huggingface`
+- **Document Processing:** `PyPDF2`, `python-docx`, `python-pptx`
+- **LLM Provider:** NVIDIA API Catalog (Llama 3 70B)
 
 ---
 
@@ -162,7 +162,7 @@ This application provides a robust Enterprise Q&A Architecture:
 
 ### 1. Environment Setup and Dependencies
 
-Create a virtual environment (recommended) and install the dependency package[cite: 22].
+Create a virtual environment (recommended) and install the dependency package.
 
 ```bash
 python -m venv dsaenv
