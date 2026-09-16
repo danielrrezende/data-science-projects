@@ -7,34 +7,38 @@ Uma implementação ponta a ponta de fine-tuning de instruções eficiente em pa
 ## 📌 Visão Geral do Projeto
 
 Este projeto constrói um assistente especializado de Perguntas e Respostas voltado para um domínio específico usando o conjunto de dados `nlpie/Llama2-MedTuned-Instructions`:
-- **Pré-processamento de Dados de Instrução:** Prepara prompts de fine-tuning supervisionado envolvendo a instrução, o contexto de entrada e a saída esperada no modelo de formatação de chat padrão do LLaMA-2 (`[INST]<<SYS>>...[/INST]`).
-- **Fine-Tuning QLoRA de 4 Bits:** Carrega o modelo base em NormalFloat de 4 bits (`nf4`) via `bitsandbytes`, anexa adaptadores de baixo rank (`r=8, alpha=16`) com o `peft` e executa o instruction tuning por meio do `SFTTrainer` da TRL.
-- **Mesclagem de Adaptadores:** Mescla os adaptadores LoRA treinados de volta aos pesos do modelo base com `merge_and_unload()` para implantação otimizada e inferência de modelo único.
-- **Pipeline LangChain e Memória:** Envolve o modelo mesclado em um `HuggingFacePipeline`, estabelece um modelo de prompt com `PromptTemplate` e equipa o modelo com interação com estado usando `ConversationBufferMemory` em uma `LLMChain`.
+
+* **Pré-processamento de Dados de Instrução:** Prepara prompts de fine-tuning supervisionado envolvendo a instrução, o contexto de entrada e a saída esperada no modelo de formatação de chat padrão do LLaMA-2 (`[INST]<<SYS>>...[/INST]`).
+* **Fine-Tuning QLoRA de 4 Bits:** Carrega o modelo base em NormalFloat de 4 bits (`nf4`) via `bitsandbytes`, anexa adaptadores de baixo rank (`r=8, alpha=16`) com `peft` e executa o instruction tuning por meio do `SFTTrainer` da TRL.
+* **Mesclagem de Adaptadores:** Mescla os adaptadores LoRA treinados de volta aos pesos do modelo base com `merge_and_unload()` para implantação otimizada e inferência de modelo único.
+* **Pipeline LangChain e Memória:** Envolve o modelo mesclado em um `HuggingFacePipeline`, estabelece um modelo de prompt com `PromptTemplate` e equipa o modelo com interação com estado usando `ConversationBufferMemory` em uma `LLMChain`.
 
 ---
 
 ## 🛠️ Pilha Tecnológica e Requisitos
 
-- **Linguagem:** Python 3.10+ (testado no Python 3.11.5)
-- **Requisito de Hardware:** GPU com suporte a CUDA (testado em uma NVIDIA A100 40GB)
-- **Frameworks e Bibliotecas Principais:**
-  - `transformers` & `peft`
-  - `bitsandbytes` & `accelerate`
-  - `trl` (para o `SFTTrainer`)
-  - `datasets` (Hugging Face Datasets)
-  - `langchain` & `langchain-community`
-  - `watermark`
+* **Linguagem:** Python 3.10+ (testado no Python 3.11.5)
+* **Requisito de Hardware:** GPU com suporte a CUDA (testado em uma NVIDIA A100 40GB)
+* **Frameworks e Bibliotecas Principais:**
+* `transformers` & `peft`
+* `bitsandbytes` & `accelerate`
+* `trl` (para o `SFTTrainer`)
+* `datasets` (Hugging Face Datasets)
+* `langchain` & `langchain-community`
+* `watermark`
+
+
 
 ---
 
 ## 🚀 Instalação e Configuração
 
 1. **Instale as bibliotecas necessárias:**
-   ```bash
-   pip install -q accelerate peft bitsandbytes transformers trl datasets langchain watermark
+```bash
+pip install -q accelerate peft bitsandbytes transformers trl datasets langchain watermark
 
 ```
+
 
 2. **Dataset:**
 O notebook busca os dados diretamente do Hugging Face Hub:
@@ -65,8 +69,8 @@ O notebook busca os dados diretamente do Hugging Face Hub:
 ### 3. Argumentos de Treinamento SFT (`TrainingArguments`)
 
 * **Otimizador:** `paged_adamw_32bit`
-* **Taxa de Aprendizado (Learning Rate):** `2e-4` (agendador de cosseno / cosine scheduler)
-* **Tamanho do Lote (Batch Size):** `1` por dispositivo com `gradient_accumulation_steps = 4`
+* **Taxa de Aprendizado:** `2e-4` (agendador de cosseno / cosine scheduler)
+* **Tamanho do Lote:** `1` por dispositivo com `gradient_accumulation_steps = 4`
 * **Passos de Treinamento:** Máximo de `150` passos com `fp16 = True`
 * **Comprimento de Sequência:** `max_seq_length = 512` com empacotamento de sequência ativado (`packing = True`)
 
@@ -79,23 +83,23 @@ O notebook busca os dados diretamente do Hugging Face Hub:
                   │
                   ▼
 [ Formatação do Modelo de Prompt Personalizado ] ──► TRL SFTTrainer
-                  │                                         │
-[ Llama-2-7b-chat-hf (QLoRA 4-bit) ] ───────────────────────┘
+                  │                              │
+[ Llama-2-7b-chat-hf (QLoRA 4-bit) ] ────────────┘
                   │
                   ▼
-        [ 150 Passos de Treinamento ]
+       [ 150 Passos de Treinamento ]
                   │
                   ▼
-        [ Salvar e Mesclar Adaptador LoRA ]
+       [ Salvar e Mesclar Adaptador LoRA ]
                   │
                   ▼
-   [ Pipeline Hugging Face ] (text-generation)
+   [ Hugging Face Pipeline ] (text-generation)
                   │
                   ▼
    [ LangChain LLMChain + ConversationBufferMemory ]
                   │
                   ▼
-       [ Assistente de QA Interativo ]
+     [ Assistente de QA Interativo ]
 
 ```
 
@@ -145,7 +149,6 @@ However, the question asks about the exception, which is not included in the Alm
 
 * Modelo pré-treinado hospedado por [NousResearch / Hugging Face](https://huggingface.co/NousResearch/Llama-2-7b-chat-hf).
 * Conjunto de dados curado por [nlpie no Hugging Face](https://huggingface.co/datasets/nlpie/Llama2-MedTuned-Instructions).
-
 
 <br>
 <br>
