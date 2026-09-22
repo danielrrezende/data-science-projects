@@ -1,4 +1,4 @@
-# Geração de Texto com GPT-2 Large em Python
+# Geração de Texto com Tokenizer e GPT-2 por Inferência Direta via Hugging Face Transformers
 
 Um estudo de caso prático que demonstra como carregar um Grande Modelo de Linguagem (LLM) pré-treinado usando a biblioteca `transformers` da Hugging Face e gerar texto coerente utilizando a técnica de *Beam Search*.
 
