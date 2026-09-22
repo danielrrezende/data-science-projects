@@ -29,26 +29,42 @@ Este projeto apresenta o pipeline de ponta a ponta para geração de texto com u
 Você pode instalar todos os pacotes necessários usando o `pip`:
 
 ```bash
-pip install watermark
-pip install tensorflow==2.14.0
-pip install transformers==4.35.2
-pip install torch
+pip install tensorflow
+pip install transformers
+
 ```
 
 > **Nota:** Recomenda-se um ambiente com GPU (como o Google Colab com GPU padrão T4/V100), pois o modelo `gpt2-large` tem aproximadamente 3,25 GB de tamanho (774 milhões de parâmetros).
+> 
+> 
 
 ---
 
 ## 🧠 Arquitetura do Modelo e Conceitos
 
 ### 1. Tokenizer (`GPT2Tokenizer`)
-- Identificador do modelo: `gpt2-large`
-- Tamanho do vocabulário: `50.257`
-- Janela de contexto: `1.024` *tokens*
-- Codifica o texto de entrada em IDs de *tokens* (`tensor([[ 2061, 318, 35941, 9345]])` para `"What is Artificial Intelligence"`). ### 2. Modelo de Linguagem (`GPT2LMHeadModel`)
-- Modelo GPT-2 com uma cabeça de modelagem de linguagem causal (`lm_head: Linear(1280 -> 50257)`).
-- 36 camadas de transformer (`GPT2Block`), dimensão oculta de 1280, 20 cabeças de atenção.
-- Token de preenchimento (*padding*) alinhado ao token de fim de sequência (`pad_token_id = tokenizer.eos_token_id`).
+
+* Identificador do modelo: `gpt2-large`
+
+* Tamanho do vocabulário: `50.257`
+
+* Janela de contexto: `1.024` *tokens*
+
+* Codifica o texto de entrada em IDs de *tokens* (`tensor([[ 2061, 318, 35941, 9345]])` para `"What is Artificial Intelligence"`).
+
+
+
+### 2. Modelo de Linguagem (`GPT2LMHeadModel`)
+
+* Modelo GPT-2 com uma cabeça de modelagem de linguagem causal (`lm_head: Linear(1280 -> 50257)`).
+
+
+* 36 camadas de transformer (`GPT2Block`), dimensão oculta de 1280, 20 cabeças de atenção.
+
+
+* Token de preenchimento (*padding*) alinhado ao token de fim de sequência (`pad_token_id = tokenizer.eos_token_id`).
+
+
 
 ---
 
@@ -67,49 +83,61 @@ input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
 # 3. Gerar Texto com Beam Search
 output_ids = model.generate(
-input_ids,
-max_length=100,
-num_beams=5,
-​​  no_repeat_ngram_size=2,
-early_stopping=True
+    input_ids,
+    max_length=100,
+    num_beams=5,
+    no_repeat_ngram_size=2,
+    early_stopping=True
 )
 
 # 4. Decodificar os Tokens de Saída
 generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 print(generated_text)
+
 ```
 
 ### Explicação dos Hiperparâmetros de Geração
+
 | Parâmetro | Valor | Finalidade |
-| :--- | :--- | :--- |
-| `max_length` | `100` | Comprimento máximo combinado (prompt + conclusão) em tokens. |
-| `num_beams` | `5` | Utiliza *Beam Search* com 5 feixes (*beams*) para explorar sequências de palavras com maior probabilidade, em vez de uma seleção gulosa (*greedy*). |
-| `no_repeat_ngram_size` | `2` | Impede que o modelo repita combinações de 2 palavras, minimizando a repetição de texto. |
-| `early_stopping` | `True` | Interrompe a geração assim que todos os candidatos do *beam* atingem o token de fim de sequência (`eos_token`). | ---
+| --- | --- | --- |
+| `max_length` | `100` | Comprimento máximo combinado (prompt + conclusão) em tokens.
+
+ |
+| `num_beams` | `5` | Utiliza *Beam Search* com 5 feixes (*beams*) para explorar sequências de palavras com maior probabilidade, em vez de uma seleção gulosa (*greedy*).
+
+ |
+| `no_repeat_ngram_size` | `2` | Impede que o modelo repita combinações de 2 palavras, minimizando a repetição de texto.
+
+ |
+| `early_stopping` | `True` | Interrompe a geração assim que todos os candidatos do *beam* atingem o token de fim de sequência (`eos_token`).
+
+ |
+
+---
 
 ## 📄 Exemplo de Saída
 
 **Prompt de Entrada:**
+
 ```
-O que é Inteligência Artificial
+What is Artificial Intelligence?
+
 ```
 
 **Saída do Modelo:**
-```text
-O que é Inteligência Artificial?
 
-A inteligência artificial (IA) é um ramo da ciência da computação que trata de programas de computador
-capazes de aprender e se adaptar ao seu ambiente. A IA existe há muito tempo,
-mas foi apenas recentemente que os computadores se tornaram capazes de realizar tarefas que
-antes se acreditava estarem além das capacidades dos seres humanos. Por exemplo, um programa de computador
-pode aprender a jogar um videogame jogando a mesma partida repetidamente. Isso é chamado
-de aprendizado por reforço.
+```text
+What is Artificial Intelligence?
+
+Artificial intelligence (AI) is a branch of computer science that deals with computer programs that are able to learn and adapt to their environment. AI has been around for a long time, but it is only recently that computers have become capable of performing tasks that were once thought to be beyond the capabilities of human beings. For example, a computer program can learn how to play a video game by playing the same game over and over again. This is called reinforcement learning.
+
 ```
 
 ---
 
 ## 📚 Agradecimentos e Referências
-- Pesos pré-treinados hospedados no [Hugging Face Models (gpt2-large)](https://huggingface.co/gpt2-large).
+
+* Pesos pré-treinados hospedados no [Hugging Face Models (gpt2-large)](https://huggingface.co/gpt2-large?utm_source=gemini).
 
 
 
