@@ -91,7 +91,6 @@ print("Resposta:", response)
 
 ## 📚 Agradecimentos e Referências
 
-* Estudo de caso e projeto estruturado pela [Data Science Academy](https://www.datascienceacademy.com.br).
 * Modelo pré-treinado fornecido pelo Google via [Hugging Face (`google/flan-t5-base`)](https://huggingface.co/google/flan-t5-base).
 
 
