@@ -1,0 +1,15 @@
+Vector Store (sem LLM):
+
+RAG (Retrieval-Augmented Generation) é uma abordagem que combina o uso de Large Language Models
+(LLMs) com a recuperação de dados relevantes de fontes de conhecimento confiáveis. Isso permite que
+as organizações tenham mais controle sobre o texto gerado pelo LLM e forneçam respostas mais
+precisas e confiáveis aos usuários. Na construção de aplicações inteligentes, RAG pode ser usado
+para personalizar um LLM com fontes de dados confiáveis, tornando seu uso mais seguro e eficaz. Isso
+é especialmente importante para aplicações que exigem respostas precisas, como na área médica, por
+exemplo. Além disso, RAG também pode ser usado para melhorar a confiabilidade e a qualidade das
+respostas geradas por chatbots e assistentes virtuais.
+
+
+Vector DB (com LLM):
+
+RAG é uma abordagem que combina modelos de geração de linguagem com modelos de recuperação de informações para melhorar a capacidade de personalização e resposta dos modelos de linguagem. Ele utiliza um mecanismo de busca para recuperar informações relevantes durante o processo de geração de texto, permitindo que o modelo incorpore conhecimento externo em suas respostas. Isso ajuda a melhorar a qualidade e relevância das respostas geradas pelo modelo, tornando-as mais adequadas para o contexto específico em que estão sendo utilizadas. RAG é uma técnica avançada que tem sido aplicada com sucesso em diversas tarefas de processamento de linguagem natural, como geração de respostas em diálogos e criação de resumos de textos. É uma abordagem promissora para personalizar e aprimorar a capacidade dos modelos de linguagem em lidar com uma ampla variedade de tarefas e contextos.
