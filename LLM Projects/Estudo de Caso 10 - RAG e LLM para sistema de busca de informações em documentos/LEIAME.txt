@@ -1,0 +1,44 @@
+# Instrução Para Execução do Projeto:
+
+# Crie um ambiente virtual
+python -m venv ragenv
+
+# Ative o ambiente
+source ragenv/bin/activate
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Crie o container Docker
+docker run --name vectordb -dit -p 6333:6333 qdrant/qdrant
+
+        # se já existir, use 
+        docker start vectordb
+
+# Crie o banco de dados vetorial
+
+        # 1. Apaga a coleção antiga do Qdrant (que era 768 dim)
+        curl -X DELETE http://localhost:6333/collections/RAGVectorDB
+
+        # 2. Apaga o controle de arquivos indexados (pra reindexar tudo)
+        rm -f arquivos_indexados.json
+
+        # 3. Roda de novo para criar
+        python rag.py Documentos
+
+# Acesse o Dashboard
+http://localhost:6333/dashboard
+
+# Inicialize a API
+python rag_start_api.py
+
+# Execute a app web
+streamlit run rag_web_app.py
+
+# Desative o ambiente virtual quando concluir o trabalho
+deactivate
+
+
+
+
+
