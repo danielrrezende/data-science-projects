@@ -1,4 +1,4 @@
-# Projeto 8 - Ajuste Fino com Nossos Próprios Dados e Deploy de LLM via App Web
+# Ajuste Fino com Nossos Próprios Dados e Deploy de LLM via App Web
 
 # Abra o terminal ou prompt de comando, navegue até a pasta com os arquivos e execute o comando abaixo para criar um ambiente virtual:
 
