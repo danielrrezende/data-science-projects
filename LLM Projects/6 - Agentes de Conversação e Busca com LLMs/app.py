@@ -1,4 +1,4 @@
-# Projeto 6 - Construção e Deploy de Interface Web Para Agente de Conversação e Busca com LangChain e LLM
+# Construção e Deploy de Interface Web Para Agente de Conversação e Busca com LangChain e LLM
 
 # Framework para criação de aplicações web
 import streamlit as st  
