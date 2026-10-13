@@ -2,14 +2,14 @@
 
 Este projeto é dividido em duas fases distintas: **Treinamento** e **Deploy**. 
 
-### 1. Fase de Treinamento (`Projeto8-Treinamento.ipynb`)
+### 1. Fase de Treinamento (`fine-tuning-treinamento.ipynb`)
 - **Arquitetura Customizada:** Configura uma arquitetura GPT-2 fortemente reduzida (`n_layer=2`, `n_head=4`) com ~15 milhões de parâmetros, otimizada especificamente para uma janela de contexto minúscula.
 - **Tokenizador Customizado:** Constrói um tokenizador Python sob medida (`DSATokenizer`) mapeado estritamente para um vocabulário de 13 tokens (`0-9`, `+`, `=`, e um token de preenchimento/padding `-1`).
 - **Engenharia de Dados:** Gera um conjunto de dados sintético de 1.000.000 de equações de adição de um único dígito formatadas como sequências (ex: `2 + 3 = 0 5`) e as encapsula em um `Dataset` do PyTorch.
 - **Treinamento do Modelo:** Utiliza o `Accelerate` da Hugging Face para treinar o modelo do zero ao longo de 2 épocas (epochs) usando a função de perda de entropia cruzada padrão (cross-entropy loss), ensinando ao LLM o "raciocínio" lógico da adição.
 - **Avaliação:** Avalia a precisão (accuracy) do modelo diretamente com problemas matemáticos sintéticos para garantir a convergência.
 
-### 2. Fase de Deploy (`Projeto8-Deploy.ipynb`)
+### 2. Fase de Deploy (`fine-tuning-deploy.ipynb`)
 - **Carregamento do Modelo:** Carrega os pesos recém-treinados (`llm_dsa_final`) junto com a lógica do tokenizador customizado.
 - **Pipeline de Inferência:** Implementa um loop de previsão autorregressivo (`dsa_faz_previsao`) que extrai continuamente o logit de maior probabilidade.
 - **Interface Web:** Encapsula todo o mecanismo de inferência dentro de uma aplicação web **Gradio** altamente acessível (`gr.Interface`), permitindo que os usuários insiram strings matemáticas de forma interativa (ex: `5 + 3 =`) e recebam os resultados gerados pelo LLM em tempo real.
@@ -117,14 +117,14 @@ An end-to-end tutorial project demonstrating how to train a miniature Language M
 
 This project is divided into two distinct phases: **Training** and **Deployment**. 
 
-### 1. Training Phase (`Projeto8-Treinamento.ipynb`)
+### 1. Training Phase (`fine-tuning-treinamento.ipynb`)
 - **Custom Architecture:** Configures a heavily downsized GPT-2 architecture (`n_layer=2`, `n_head=4`) with ~15 million parameters specifically optimized for a tiny context window.
 - **Custom Tokenizer:** Builds a bespoke Python tokenizer (`DSATokenizer`) mapped strictly to a vocabulary of 13 tokens (`0-9`, `+`, `=`, and a padding token `-1`).
 - **Data Engineering:** Generates a synthetic dataset of 1,000,000 single-digit addition equations formatted as sequences (e.g., `2 + 3 = 0 5`) and wraps it in a PyTorch `Dataset`.
 - **Model Training:** Utilizes Hugging Face `Accelerate` to train the model from scratch over 2 epochs using standard cross-entropy loss, teaching the LLM the logical "reasoning" of addition.
 - **Evaluation:** Evaluates the model's accuracy directly against synthetic math problems to guarantee convergence.
 
-### 2. Deployment Phase (`Projeto8-Deploy.ipynb`)
+### 2. Deployment Phase (`fine-tuning-deploy.ipynb`)
 - **Model Loading:** Loads the newly trained weights (`llm_dsa_final`) alongside the custom tokenizer logic.
 - **Inference Pipeline:** Implements an autoregressive prediction loop (`dsa_faz_previsao`) that continually extracts the highest-probability logit.
 - **Web UI:** Wraps the entire inference engine inside a highly accessible **Gradio** web application (`gr.Interface`), allowing users to input math strings interactively (e.g., `5 + 3 =`) and receive LLM-generated results in real-time.
