@@ -1,87 +1,262 @@
-# Storytelling
+<a id="top"></a>
 
-## 1 - Apresentação do Desafio
+🌐 **Idioma / Language:** [🇧🇷 Português (PT-BR)](#pt-br) | [🇺🇸 English (EN)](#en)
 
-O desafio consiste em analisar os dados da Open Ocean Data do the Ireland's Digital Ocean Institute e fazer previsão da temperatura do mar ao longo do tempo.
+---
 
-## 2 - Analise e desenvolvimento do Desafio
+<a id="pt-br"></a>
 
-Estes foram gerados e desenvolvidos no Microsoft Azure Databricks, ferramenta que da agilidade com varias bases de dados e manipulação dos dados
+# 🇧🇷 Waves Analytics
 
-## 3 - Linguagem usada no desafio
+Projeto de análise exploratória e modelagem preditiva de dados oceânicos coletados na costa da Irlanda. O objetivo principal é entender padrões de temperatura da água, altura de onda e comportamento sazonal dos fenômenos marítimos, além de desenvolver uma previsão de séries temporais para a variável de interesse: a temperatura do mar.
 
-Para tal, Foi usada:\
-**Pyspark** na Coleta, Limpeza e Manipulação dos dados (notebook 1_coleta_limpa_dados) e \  
-**Python** na exploração de dados na respostas das perguntas (2_explora_dados, 3_perguntas, 4_bonus)
+---
 
-## 4 - Distribuição das tarefas em notebooks
+## 🚀 Visão Geral
 
-Para tal desafio, foram feitas, nos respectivos notebooks: \
-**1_coleta_limpa_dados** - Coleta, Limpeza e Manipulação dos dados, \
-**2_explora_dados** - Exploração dos dados, \
-**3_perguntas** - Respostas das perguntas 'Minimum requirements' \
-**4_bonus** - Analise dos dados da time series E criação do modelo de time series
+Este projeto combina dados de boias oceanográficas e estações de mare e onda para responder perguntas analíticas sobre:
 
-## 5 - Perguntas do desafio
+- quais regiões registram as menores temperaturas da água;
+- em que meses esses eventos ocorrem com maior frequência;
+- como a altura de onda (Hmax) se relaciona com a temperatura da superfície;
+- qual o comportamento sazonal e temporal da temperatura marinha;
+- como construir um modelo de previsão para um horizonte de 1 ano.
 
-1) Na **primeira questão**, listei as menores temperaturas lidas pelas boias, e identifiquei estas no mapa do pais. A principio eu também estava listando as bays, posteriormente percebi que o enunciado só pedia pelos Buoy. Também informei, através de um gráfico de pizza, quais os meses de maior ocorrencia.\
+Os dados foram processados em notebooks do ambiente Azure Databricks, com uso de PySpark para coleta, limpeza e manipulação inicial, e Python para exploração, visualização e modelagem estatística.
 
-![image](https://user-images.githubusercontent.com/43621929/192382101-afe00136-79c4-4d83-9450-b2bb6f51e5b9.png)
+---
 
-Localização das Boias (Bouys) que registraram menores temperaturas\
-![image](https://user-images.githubusercontent.com/43621929/192382152-6358dfd0-d0bf-49da-a46c-c3531318bda0.png)
+## 📊 Dados e Fonte do Projeto
 
+A base de dados é composta por séries temporais de observações marinhas, com foco em:
 
-Which usually month it occurs?\
-![image](https://user-images.githubusercontent.com/43621929/192382279-9da3d277-02ca-41aa-a4a0-c037634c711d.png)
+- ondas: `wave/`
+- marés: `tide/`
+- dados consolidados e exportados: `database/export.csv`
 
+Algumas colunas relevantes incluem:
 
-\
-2) Na **segunda questão**, listei o local de maior nivel de água, indicando também no mapa. Foi indicado o mês de ocorrencia.\
-![image](https://user-images.githubusercontent.com/43621929/192382396-9afda6d4-9951-4b2c-895c-dd8eb639bacc.png)
+- `time`
+- `latitude` e `longitude`
+- `station_id`
+- `PeakPeriod`
+- `SignificantWaveHeight`
+- `Hmax`
+- `SeaTemperature`
+- `MeanCurSpeed`
+- `MeanCurDirTo`
 
-Localização no mapa\
-![image](https://user-images.githubusercontent.com/43621929/192382429-8361efb9-09f4-4ac0-a582-54100d60032f.png)
+A combinação dessas variáveis permite avaliar a dinâmica oceânica em escala espacial e temporal, além de criar indicadores para modelagem preditiva.
 
-Which usually month it occurs?\
-![image](https://user-images.githubusercontent.com/43621929/192382596-9d0d0042-c26d-4755-8fa3-3711eb9e764b.png)
+---
 
+## 🧭 Objetivos do Desafio
 
+A análise foi organizada em etapas:
 
-\
-3) Na **terceira questão**, fiz uma correlação entre as features **Wave Lenghts (Hmax)** com **Sea Temperature** e vi que possuem correlação negativa de -0,29, o que indica que uma leve influencia entre as features (valor 0,29, que vai de 0 a 1), e pelo fato de ser negativa, indica que uma feature pode ter influencia contraria sobre a outra.\
-![image](https://user-images.githubusercontent.com/43621929/192382807-949092ed-a7d3-4f23-bf2e-4eef72e8543b.png)
+1. Coleta e limpeza dos dados
+2. Exploração e interpretação dos padrões oceânicos
+3. Resposta a perguntas de negócio e ciência de dados
+4. Desenvolvimento de uma série temporal para prever temperatura do mar
+5. Interpretação dos resultados e validação visual
 
-Com relação a **latitude** e **longitude**, possuem correlação em modulo de -0,033 e 0,08 respectivamente, bem proximas de 0, o que indica que não se sabe exatamente o que ocorre com uma feature quando a outra varia e portanto, pode indicar uma potencial complementariedade entre si, sendo potenciais candidatas à combinação de features\
+---
 
-![image](https://user-images.githubusercontent.com/43621929/192382842-4e46839a-e45d-4a92-9216-b7b709909fff.png)
+## 🗂️ Estrutura do Projeto
 
+```text
+waves_analytics/
+├── 1_coleta_limpa_dados.ipynb     # coleta, limpeza e preparação dos dados
+├── 2_explora_dados.ipynb          # análise exploratória e visualizações
+├── 3_perguntas.ipynb              # respostas às perguntas do desafio
+├── 4_bonus.ipynb                 # análise da série temporal e previsão
+├── dadosfera.ipynb               # notebook complementar / investigação extra
+├── database/
+│   ├── export.csv                # base consolidada
+│   ├── tide/                     # arquivos de dados de maré
+│   └── wave/                     # arquivos de dados de onda
+├── tide/                         # cópias locais dos dados de maré
+├── wave/                         # cópias locais dos dados de onda
+├── README.md                     # documentação do projeto
+└── .gitignore                    # arquivos ignorados pelo Git
+```
 
-## 6 - Lidando o desafio
+---
 
-1) Primeiramente:
-- fiz a **análise da feature de tempo**, que vai de **2021-09-20 a 2022-09-21**\
+## 🛠️ Tecnologias Utilizadas
 
-- depois **Análise de target da série temporal**, no caso SeaTemperature, vi que para um mesmo dia, existe casos de varias medições. Para lidar com isso, fiz uma media de temperatura para um dado dia, com todas as medições deste dia. Verifiquei o número de valores ausentes na coluna de destino.\
-![image](https://user-images.githubusercontent.com/43621929/192383039-42db59ae-a2ff-4236-bd6d-34ea8091194d.png)
+- **PySpark** para coleta, limpeza e manipulação dos dados em larga escala
+- **Python** para exploração, análise estatística e visualização
+- **Pandas / NumPy** para preparação de dados e cálculos
+- **Matplotlib / Seaborn** para visualização
+- **Databricks** como ambiente principal de execução
+- **Modelagem de séries temporais** com abordagem de decomposição e previsão sazonal
 
+---
 
-- Visualizei os dados\
-![image](https://user-images.githubusercontent.com/43621929/192383128-2fe497d8-ecbd-4c5f-a96e-c82de9a3ff39.png)
+## 📈 Principais Insights da Análise
 
+Ao longo do projeto, foram identificados e explorados diversos padrões relevantes:
 
-2)Na montagem do modelo, fiz visualizações sazonais ao longo de uma semana e mais de um ano\
-![image](https://user-images.githubusercontent.com/43621929/192383222-3c5d1930-2bc4-43eb-a66f-8edd7713beca.png)
+- regiões com as menores temperaturas registradas pelas boias;
+- meses de maior ocorrência de eventos extremos ou atípicos;
+- análise espacial das medições no mapa da Irlanda;
+- correlação entre a variável `Hmax` e `SeaTemperature`;
+- avaliação da influência de latitude e longitude nas observações;
+- decomposição temporal da série e identificação de sazonalidade;
+- previsão de temperatura do mar para um horizonte anual.
 
+A correlação entre altura máxima de onda e temperatura apresentou comportamento negativo, indicando que o aumento da amplitude das ondas pode estar associado a condições oceânicas diferentes das observações de temperatura da superfície. Esse tipo de relação ajuda a orientar análises futuras de modelagem e sensibilidade climática.
 
-- analise Periodograma, ou seja, por periodos de tempo\
-![image](https://user-images.githubusercontent.com/43621929/192383262-9cf8dc27-b531-4725-ad24-5e6815981b3d.png)
+---
 
+## 🧪 Fluxo de Trabalho do Projeto
 
-- Uso de DeterministicProcess, usado para criar recursos de tendência
-Finalmente, Sea Temperature - Seasonal Forecast, previsões de temperatura do mar, para um periodo de 1 ano
+### 1. Coleta e limpeza
+A primeira etapa consistiu em carregar os dados de ondas e marés, realizar padronização de colunas, tratar valores faltantes e preparar a base para a análise.
 
-![image](https://user-images.githubusercontent.com/43621929/192383329-3b356a56-1863-4a0a-8b25-8d03760b85ce.png)
+### 2. Exploração dos dados
+Os notebooks foram usados para:
 
+- visualizar a distribuição temporal;
+- comparar estações e regiões;
+- identificar períodos de maior variabilidade;
+- mapear ocorrências geográficas por temperatura e nível de água.
 
+### 3. Respostas às perguntas do desafio
+O projeto respondeu perguntas analíticas referentes a:
 
+- menor temperatura observada por boia;
+- mês mais frequente de ocorrência;
+- maior nível de água e sua localização;
+- relação entre variáveis físicas do ambiente marinho.
+
+### 4. Modelagem de séries temporais
+A etapa final focou na análise da série temporal da temperatura do mar, com:
+
+- agregação diária da variável alvo;
+- verificação de valores ausentes;
+- visualização de tendência e sazonalidade;
+- uso de `DeterministicProcess` e estrutura de previsão sazonal;
+- previsão para um período de 1 ano.
+
+---
+
+## ✅ Requisitos e Execução
+
+### Requisitos
+
+- Python 3.10+
+- Jupyter Notebook ou ambiente Databricks
+- Bibliotecas principais: `pyspark`, `pandas`, `numpy`, `matplotlib`, `seaborn`
+
+### Como executar
+
+1. Abra o notebook `1_coleta_limpa_dados.ipynb` para preparar e limpar a base.
+2. Em seguida, execute `2_explora_dados.ipynb` para validar padrões e visualizar tendências.
+3. Use `3_perguntas.ipynb` para responder as perguntas do desafio.
+4. Por fim, execute `4_bonus.ipynb` para realizar a análise temporal e a previsão.
+
+> O projeto foi originalmente desenvolvido no Microsoft Azure Databricks, mas a estrutura dos notebooks permite adaptação para execução local em ambiente Python/Jupyter.
+
+---
+
+## 📌 Resultado Esperado
+
+O conjunto de análises produz uma visão integrada sobre o comportamento dos dados oceânicos na região estudada, permitindo:
+
+- localizar áreas com temperaturas mais baixas;
+- relacionar fenômenos físicos e temporais;
+- detectar sazonalidade e variabilidade da temperatura do mar;
+- produzir previsões úteis para monitoramento ambiental e tomada de decisão.
+
+---
+
+## 📚 Referências
+
+- Open Ocean Data / Ireland's Digital Ocean Institute
+- Dados de boias e estações de medição oceânica
+- Análise de séries temporais e previsões sazonais em contextos ambientais
+
+---
+
+[⬆️ Voltar ao topo](#top)
+
+---
+
+<a id="en"></a>
+
+🌐 **Idioma / Language:** [🇧🇷 Português (PT-BR)](#pt-br) | [🇺🇸 English (EN)](#en)
+
+# 🇺🇸 Waves Analytics
+
+A data science project focused on exploratory analysis and predictive modeling of ocean data collected along the Irish coast. The primary goal is to understand sea temperature patterns, wave behavior, and seasonal dynamics, while also developing a time-series forecast for the target variable: sea temperature.
+
+---
+
+## 🚀 Project Overview
+
+This project combines wave and tide data from ocean monitoring stations to answer analytical questions such as:
+
+- which regions show the lowest water temperatures;
+- which months are most associated with those events;
+- how wave height (`Hmax`) relates to sea temperature;
+- how seasonal and temporal patterns evolve over time;
+- how to build a forecasting model for a one-year horizon.
+
+The data was processed in Azure Databricks notebooks, using PySpark for ingestion and cleaning and Python for exploratory analysis, visualization, and statistical modeling.
+
+---
+
+## 🧱 Project Structure
+
+```text
+waves_analytics/
+├── 1_coleta_limpa_dados.ipynb
+├── 2_explora_dados.ipynb
+├── 3_perguntas.ipynb
+├── 4_bonus.ipynb
+├── dadosfera.ipynb
+├── database/
+│   ├── export.csv
+│   ├── tide/
+│   └── wave/
+├── tide/
+├── wave/
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 🔍 Main Analysis Topics
+
+- spatial analysis of low-temperature measurements;
+- identification of seasonal peaks and monthly concentration;
+- correlation between wave conditions and sea temperature;
+- time-series decomposition and trend analysis;
+- seasonal forecasting of sea temperature.
+
+---
+
+## ⚙️ Tools and Stack
+
+- PySpark
+- Python
+- Pandas and NumPy
+- Matplotlib and Seaborn
+- Azure Databricks
+- Time-series forecasting with seasonal decomposition and trend modeling
+
+---
+
+## ▶️ How to Run
+
+1. Open `1_coleta_limpa_dados.ipynb` to prepare the data.
+2. Run `2_explora_dados.ipynb` for exploratory analysis and charts.
+3. Use `3_perguntas.ipynb` to answer challenge-specific questions.
+4. Execute `4_bonus.ipynb` for the time-series forecast analysis.
+
+---
+
+[⬆️ Back to top](#top)
