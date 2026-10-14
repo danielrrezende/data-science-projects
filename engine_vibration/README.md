@@ -6,7 +6,7 @@
 
 <a id="pt-br"></a>
 
-# 🔧 Análise de Vibração de Motores — Estudo de caso de Ciência de Dados
+# 🔧 Análise de Vibração de Motores — Estudo de caso
 
 Projeto exploratório possui um notebook que reúne dados de vibração de acelerômetros e informações de ativos industriais para explorar sinais, relacionar sensores a equipamentos e investigar aplicações de manutenção preditiva.
 
