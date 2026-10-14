@@ -1,40 +1,54 @@
-# Custo médio anual - Planos de saúde
+# Estimativa do custo anual de planos de saúde
 
-## Descrição
-Uma administradora de planos de saúde precisa desenvolver um modelo preditivo que estima o custo médio anual gasto por cliente. Sua missão será de desenvolver uma modelagem preditiva baseada em algumas informações cadastrais. A administradora tem em mãos uma base de teste para posterior avaliação de performance da sua modelagem final.
-O resultado de seu estudo será encaminhado para as áreas de negócio para validação funcional.
+## Contexto e objetivo
 
-Os dados para esse case estão divididos em dois arquivos:
+Uma administradora de planos de saúde quer estimar o custo anual de cada cliente a partir de informações cadastrais. O objetivo deste projeto é desenvolver e avaliar um modelo de regressão que estime esse custo e apresentar os resultados de forma útil para validação pelas áreas de negócio.
 
-• Seguro Saúde - Modelagem: contém os dados para modelagem e o dicionário das variáveis
+## Dados
 
-• Seguro Saúde - Teste Final: contém os dados para teste, com valores preenchidos no campo da variável resposta
+Os arquivos do case estão na pasta [`base/`](<base/>):
 
-Os resultados devem ser apresentados para a equipe avaliadora em power point ou dashboard em tableau, power bi, qlik (ou qualquer outra forma de visualização de sua preferência). O tempo para apresentação é de 45 minutos e teremos mais 15 minutos para dúvidas e comentários.
-A apresentação e os códigos desenvolvidos na análise (Python ou R) devem ser enviados para a equipe avaliadora 14 dias corridos após o recebimento do case.
+- [`Seguro Saúde - Modelagem.xlsx`](<base/Seguro Saúde - Modelagem.xlsx>): dados para desenvolvimento do modelo, na planilha `MODELAGEM`, e dicionário de variáveis, na planilha `DICIONÁRIO`.
+- [`Seguro Saúde - Teste Final.xlsx`](<base/Seguro Saúde - Teste Final.xlsx>): base de avaliação com a variável resposta preenchida, na planilha `Gabarito`.
 
-Nessa apresentação deverão ser contemplados no mínimo os seguintes tópicos:
+O estudo considera a base de modelagem como aproximadamente 90,51% dos dados e a base de teste final como os 9,49% restantes, conforme descrito no notebook.
 
-• Definição do problema e objetivo do projeto X
+### Variáveis utilizadas
 
-• Coleta e preparação dos dados
+O notebook principal seleciona as seguintes variáveis preditoras:
 
-• Análise exploratória dos dados
+| Variável | Descrição |
+| --- | --- |
+| `IDADE` | Idade do cliente |
+| `IMC` | Índice de massa corporal |
+| `FILHOS` | Quantidade de filhos |
+| `FUMANTE` | Indicação se o cliente é fumante |
 
-• Modelagem dos dados
+A variável resposta é `VALOR`, que representa o custo anual a ser estimado.
 
-• Avaliação do modelo	
+## Etapas do projeto
 
-• Comunicação dos resultados
+1. **Preparação dos dados:** leitura das planilhas, inspeção de tipos e valores ausentes e seleção das variáveis preditoras e da variável resposta.
+2. **Análise exploratória:** exploração das distribuições e relações entre as variáveis para compreender os dados antes da modelagem.
+3. **Pré-processamento:** padronização das variáveis numéricas, codificação one-hot das variáveis categóricas e imputação com `KNNImputer`, organizados em um pipeline.
+4. **Modelagem:** treinamento de um `GradientBoostingRegressor`, com `random_state=2048`.
+5. **Avaliação:** validação cruzada com cinco folds e avaliação na base de validação e na base de teste final usando R², erro médio absoluto (MAE) e erro médio quadrático (MSE).
+6. **Comunicação:** apresentação dos resultados e do processo analítico no arquivo [`apresentacao.pptx`](<apresentacao.pptx>).
 
-Lembre-se a avaliação do case levará em consideração não apenas os resultados finais obtidos, mas também o processo utilizado pelo candidato para chegar a esses resultados.
+Na divisão usada pelo notebook principal, `train_test_split` reserva 70% da base de modelagem para validação e 30% para treinamento. A base de teste final é avaliada separadamente e contém valores conhecidos de `VALOR`.
 
-Além dos aspectos técnicos do estudo, serão avaliados: 
+## Arquivos do projeto
 
-• Estruturação lógica da apresentação 
+- [`prova-accenture.ipynb`](<prova-accenture.ipynb>): notebook principal, com preparação, pipeline de modelagem e avaliação.
+- [`prova-acc-analysis.ipynb`](<prova-acc-analysis.ipynb>): notebook de análise exploratória.
+- [`prova-acc-feat-imp.ipynb`](<prova-acc-feat-imp.ipynb>): notebook complementar de análise de importância de variáveis.
+- [`apresentacao.pptx`](<apresentacao.pptx>): apresentação do case.
 
-• Habilidades de comunicação
+## Como executar
 
-• Habilidades em visualização
+1. Abra os notebooks em um ambiente Jupyter com as dependências Python usadas pelo projeto instaladas.
+2. Disponibilize os arquivos Excel da pasta `base/` no ambiente.
+3. Ajuste nos notebooks os caminhos de leitura dos arquivos, que atualmente apontam para diretórios de entrada do Kaggle.
+4. Execute as células do notebook principal em ordem para treinar e avaliar o modelo.
 
-• Compreensão de negócio e resolução de problemas
+Os notebooks calculam as métricas durante a execução; os valores numéricos não estão registrados neste README.
