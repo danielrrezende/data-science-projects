@@ -1,4 +1,12 @@
-# Assistente Jurídico IA - Sistema RAG com OCR e Indexação Paralela
+<a id="top"></a>
+
+🌐 **Idioma / Language:** [🇧🇷 Português (PT-BR)](#pt-br) | [🇺🇸 English (EN)](#en)
+
+---
+
+<a id="pt-br"></a>
+
+# 🇧🇷 Assistente Jurídico IA - Sistema RAG com OCR e Indexação Paralela
 
 Sistema completo de **RAG (Retrieval-Augmented Generation)** projetado para consulta e análise de documentos e autos judiciais. O projeto combina extração inteligente de texto (com fallback automático para OCR em documentos escaneados), indexação incremental paralelizada, banco de dados vetorial **Qdrant**, API em **FastAPI** com templates **Jinja2** e interface web interativa em **Streamlit** com mapeamento automático de citações para os arquivos originais.
 
@@ -144,38 +152,39 @@ Os principais hiperparâmetros podem ser ajustados diretamente no topo dos arqui
 * `POST /rag_api` — Recebe `{"query": "sua pergunta", "template": "prompt_contexto.j2"}` e retorna a resposta gerada (`answer`) junto aos trechos recuperados (`context`).
 * `GET /arquivos/{caminho_do_arquivo}` — Endpoint estático que serve os documentos originais para abertura direta via navegador.
 
-
 <br>
+
+[⬆️ Voltar ao topo](#top) | [🇺🇸 Read in English](#en)
+
 <br>
 
 ---
 
 <br>
-<br>
 
-## English
-<br>
+<a id="en"></a>
 
+🌐 **Idioma / Language:** [🇧🇷 Português (PT-BR)](#pt-br) | [🇺🇸 English (EN)](#en)
 
-# Legal AI Assistant - RAG System with OCR and Parallel Indexing
+# 🇺🇸 Legal AI Assistant - RAG System with OCR and Parallel Indexing
 
 A complete **RAG (Retrieval-Augmented Generation)** system designed for querying and analyzing legal documents and court records. The project combines intelligent text extraction (with automatic OCR fallback for scanned documents), parallelized incremental indexing, a **Qdrant** vector database, a **FastAPI** backend with **Jinja2** templates, and an interactive **Streamlit** web interface with automatic citation mapping to the original files.
+
+---
 
 ## 🚀 Key Features
 
 * **Intelligent Incremental Indexing:** MD5 hash tracking (`arquivos_indexados.json`) that processes only new or modified files, avoiding redundant work.
-
 * **Parallel Processing:** Text extraction and chunking distributed across multiple CPU cores (`ProcessPoolExecutor`).
-
 * **Automatic OCR:** Automatic detection of scanned PDFs (when native extraction returns fewer than 50 characters) and direct image reading using `Tesseract OCR`.
-
 * **Dynamic Prompts with Jinja2:** Flexibility to customize system instructions inside the `prompts/` folder.
-
 * **Traceability and Automatic Hyperlinks:** The system identifies the numeric ID of the documents (e.g., `ID72495028`) and turns citations in the AI's response into clickable links that open the original document directly in the browser.
+
+---
 
 ## 📂 Architecture and Project Structure
 
-```
+```text
 ├── Documentos/               # Directory where files to be indexed are stored
 ├── prompts/                  # Directory containing Jinja2 templates (e.g., prompt_contexto.j2)
 ├── rag.py                    # Ingestion pipeline, OCR, chunking, and vectorization in Qdrant
@@ -186,145 +195,123 @@ A complete **RAG (Retrieval-Augmented Generation)** system designed for querying
 ├── arquivos_indexados.json   # Automatically generated for MD5 hash tracking
 ├── requirements.txt          # Project Python dependencies
 └── LEIAME.txt                # Quick command-line instructions
-
 ```
+
+---
 
 ## 📄 Supported Document Types
 
 The vectorization module (`rag.py`) recursively scans folders and supports **10 file formats**:
 
 | Category | Extensions | Library / Method | Special Behavior | 
-| ----- | ----- | ----- | ----- | 
+| :--- | :--- | :--- | :--- | 
 | **PDF Documents** | `.pdf` | `PyPDF2`, `pdf2image`, `pytesseract` | Attempts native extraction first. If it returns `< 50` characters, converts pages to images (200 DPI) and applies OCR (`por+eng`). | 
 | **Plain Text** | `.txt` | Native `open()` | Reads in `utf-8` ignoring encoding errors (`errors="ignore"`). | 
 | **Microsoft Word** | `.docx` | `python-docx` | Extracts text from all paragraphs (`doc.paragraphs`). | 
 | **PowerPoint** | `.pptx` | `python-pptx` | Extracts text from all shapes in each slide of the presentation. | 
 | **Images** | `.jpg`, `.jpeg`, `.png`, `.tiff`, `.tif`, `.bmp` | `Pillow (PIL)`, `pytesseract` | Applies OCR directly on the image (`por+eng`). | 
 
+---
+
 ## 🛠️ System Prerequisites
 
 In addition to **Python 3.10+** and **Docker**, OCR functionality and PDF conversion require native packages installed on the operating system:
 
 ### Ubuntu / Debian
-
-```
+```bash
 sudo apt-get update
 sudo apt-get install -y tesseract-ocr tesseract-ocr-por tesseract-ocr-eng poppler-utils
-
 ```
 
 ### macOS (via Homebrew)
-
-```
+```bash
 brew install tesseract tesseract-lang poppler
-
 ```
+
+---
 
 ## ⚙️ Installation and Configuration
 
 ### 1. Create and activate the virtual environment
-
-```
+```bash
 python -m venv ragenv
 source ragenv/bin/activate  # On Windows: ragenv\Scripts\activate
-
 ```
 
 ### 2. Install Python dependencies
-
-```
+```bash
 pip install -r requirements.txt
-
 ```
 
 ### 3. Configure the API Key (NVIDIA NIM)
-
 Edit the `rag_env_var.py` file and insert your NVIDIA API key:
-
-```
+```python
 nvidia_key = "nvapi-your-key-here"
-
 ```
-
 *(Alternatively, set the `NVIDIA_API_KEY` environment variable in your system).*
 
 ### 4. Configure Prompt Templates
-
 Make sure the `prompts/` folder contains the `prompt_contexto.j2` file (the default template requested by the API).
+
+---
 
 ## ▶️ How to Run the Project
 
 ### Step 1: Start the Vector Database (Qdrant) via Docker
-
 Create and start the Qdrant container on port `6333`:
-
-```
+```bash
 docker run --name vectordb -dit -p 6333:6333 qdrant/qdrant
-
 ```
-
-> **Tip:** If the container already exists, simply start it with `docker start vectordb`.
->
-> The Qdrant web dashboard can be accessed at: <http://localhost:6333/dashboard>
+> **Tip:** If the container already exists, simply start it with `docker start vectordb`.  
+> The Qdrant web dashboard can be accessed at: [http://localhost:6333/dashboard](http://localhost:6333/dashboard)
 
 ### Step 2: Index and Vectorize the Documents
-
 Place your files in the `Documentos` folder (or specify another directory) and run the indexer:
-
-```
+```bash
 python rag.py Documentos
-
 ```
 
 > **Full Re-indexing (Reset):** If you change the embedding model or want to recreate the database from scratch:
->
-> ```
+> ```bash
 > curl -X DELETE http://localhost:6333/collections/ragVectorDB
 > rm -f arquivos_indexados.json
 > python rag.py Documentos
-> 
 > ```
 
 ### Step 3: Start the API (Backend)
-
 In a terminal (with the `ragenv` environment active), start the FastAPI server:
-
-```
+```bash
 python rag_start_api.py
-
 ```
-
 The API will be available at `http://localhost:9000` (Swagger documentation at `http://localhost:9000/docs`).
 
 ### Step 4: Start the Web Application (Frontend)
-
 In a **new terminal** (also with the `ragenv` environment active), run Streamlit:
-
-```
+```bash
 streamlit run rag_web_app.py
-
 ```
+
+---
 
 ## 🔧 Technical Parameters and Customization
 
 The main hyperparameters can be adjusted directly at the top of the `rag.py` and `rag_api.py` files:
 
 * **Embedding Model:** `sentence-transformers/all-MiniLM-L6-v2` (384 dimensions, Cosine distance).
-
 * **Chunking:** `CHUNK_SIZE = 800` tokens | `CHUNK_OVERLAP = 80` tokens (`TokenTextSplitter`).
-
 * **LLM (NVIDIA NIM):** `openai/gpt-oss-20b` (`temperature = 0.2`, `max_tokens = 4096`).
-
 * **Retrieval (Retriever):** `K_RESULTADOS = 8` most relevant chunks per query.
-
 * **OCR:** Language `por+eng` at `200 DPI` resolution.
+
+---
 
 ## 🔌 API Endpoints (`rag_api.py`)
 
 * `GET /` — Checks the API status, loaded models, and active configurations.
-
 * `GET /prompts` — Lists the available `.j2` templates in the `prompts/` directory.
-
 * `POST /rag_api` — Receives `{"query": "your question", "template": "prompt_contexto.j2"}` and returns the generated response (`answer`) along with the retrieved chunks (`context`).
-
 * `GET /arquivos/{file_path}` — Static endpoint that serves the original documents for direct opening in the browser.
+
+<br>
+
+[⬆️ Back to top](#top) | [🇧🇷 Ler em Português](#pt-br)
