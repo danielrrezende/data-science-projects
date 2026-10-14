@@ -229,7 +229,7 @@ app.mount("/arquivos", StaticFiles(directory="."), name="arquivos")
 
 class QueryRequest(BaseModel):
     query: str
-    template: str = "magistrado.j2"
+    template: str = "prompt_contexto.j2"
 
 
 class QueryResponse(BaseModel):

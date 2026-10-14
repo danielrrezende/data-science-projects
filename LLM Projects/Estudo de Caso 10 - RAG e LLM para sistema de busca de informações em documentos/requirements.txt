@@ -20,3 +20,5 @@ accelerate
 streamlit
 python-docx
 python-pptx
+pytesseract
+pdf2image
