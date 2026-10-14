@@ -1,0 +1,111 @@
+================================================================================
+
+TIPOS DE DOCUMENTOS SUPORTADOS PARA VETORIZAÇÃO (RAG)
+
+================================================================================
+
+
+
+O módulo de indexação (rag.py, definido na variável EXTENSOES_VALIDAS) suporta
+
+10 extensões de arquivos, divididas entre documentos de texto/Office e imagens:
+
+
+
+--------------------------------------------------------------------------------
+
+1. DOCUMENTOS PDF
+
+--------------------------------------------------------------------------------
+
+* Extensões suportadas : .pdf
+
+* Bibliotecas usadas   : PyPDF2, pdf2image e pytesseract
+
+* Comportamento        : Possui fallback inteligente para OCR. O sistema tenta
+
+                         extrair o texto nativo primeiro. Caso o PDF retorne
+
+                         menos de 50 caracteres (comum em processos e documentos
+
+                         escaneados/digitalizados), ele converte as páginas em
+
+                         imagens (200 DPI) e aplica OCR configurado para
+
+                         português e inglês (por+eng).
+
+
+
+--------------------------------------------------------------------------------
+
+2. TEXTO PURO
+
+--------------------------------------------------------------------------------
+
+* Extensões suportadas : .txt
+
+* Bibliotecas usadas   : Leitura nativa do Python (função open)
+
+* Comportamento        : Lê o conteúdo em codificação UTF-8, ignorando eventuais
+
+                         erros de caracteres especiais (errors="ignore").
+
+
+
+--------------------------------------------------------------------------------
+
+3. MICROSOFT WORD
+
+--------------------------------------------------------------------------------
+
+* Extensões suportadas : .docx
+
+* Bibliotecas usadas   : python-docx
+
+* Comportamento        : Extrai o texto percorrendo todos os parágrafos do
+
+                         documento (doc.paragraphs).
+
+                         Observação: Não extrai textos localizados dentro de
+
+                         tabelas, caixas de texto ou cabeçalhos/rodapés.
+
+
+
+--------------------------------------------------------------------------------
+
+4. MICROSOFT POWERPOINT
+
+--------------------------------------------------------------------------------
+
+* Extensões suportadas : .pptx
+
+* Bibliotecas usadas   : python-pptx
+
+* Comportamento        : Percorre todos os slides da apresentação e extrai o
+
+                         conteúdo textual de todas as formas (shapes) que
+
+                         possuem atributo de texto.
+
+
+
+--------------------------------------------------------------------------------
+
+5. IMAGENS
+
+--------------------------------------------------------------------------------
+
+* Extensões suportadas : .jpg, .jpeg, .png, .tiff, .tif, .bmp
+
+* Bibliotecas usadas   : Pillow (PIL) e pytesseract
+
+* Comportamento        : Abre o arquivo de imagem diretamente e aplica OCR
+
+                         (pytesseract.image_to_string) configurado para os
+
+                         idiomas português e inglês (por+eng).
+
+
+
+================================================================================
