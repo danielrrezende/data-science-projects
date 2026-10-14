@@ -6,7 +6,7 @@
 
 <a id="pt-br"></a>
 
-# 🇧🇷 Assistente Jurídico IA - Sistema RAG com OCR e Indexação Paralela
+# 🇧🇷 Assistente IA - Sistema RAG com OCR e Indexação Paralela
 
 Sistema completo de **RAG (Retrieval-Augmented Generation)** projetado para consulta e análise de documentos e autos judiciais. O projeto combina extração inteligente de texto (com fallback automático para OCR em documentos escaneados), indexação incremental paralelizada, banco de dados vetorial **Qdrant**, API em **FastAPI** com templates **Jinja2** e interface web interativa em **Streamlit** com mapeamento automático de citações para os arquivos originais.
 
@@ -166,7 +166,7 @@ Os principais hiperparâmetros podem ser ajustados diretamente no topo dos arqui
 
 🌐 **Idioma / Language:** [🇧🇷 Português (PT-BR)](#pt-br) | [🇺🇸 English (EN)](#en)
 
-# 🇺🇸 Legal AI Assistant - RAG System with OCR and Parallel Indexing
+# 🇺🇸 AI Assistant - RAG System with OCR and Parallel Indexing
 
 A complete **RAG (Retrieval-Augmented Generation)** system designed for querying and analyzing legal documents and court records. The project combines intelligent text extraction (with automatic OCR fallback for scanned documents), parallelized incremental indexing, a **Qdrant** vector database, a **FastAPI** backend with **Jinja2** templates, and an interactive **Streamlit** web interface with automatic citation mapping to the original files.
 
